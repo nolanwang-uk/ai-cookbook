@@ -1,8 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-border: #e2e8f0;
+  --card-hover: #f8fafc;
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-light: #eef2ff;
+  --accent-subtle: #c7d2fe;
+  --muted: #64748b;
+  --muted-light: #94a3b8;
+  --section-bg: #f1f5f9;
+  --surface: #ffffff;
+  --divider: #e2e8f0;
+  --success: #059669;
+  --warning: #d97706;
+  --danger: #dc2626;
 }
 
 @theme inline {
@@ -14,13 +29,78 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #030712;
+    --foreground: #f1f5f9;
+    --card: #0f172a;
+    --card-border: #1e293b;
+    --card-hover: #1e293b;
+    --accent: #818cf8;
+    --accent-hover: #a5b4fc;
+    --accent-light: rgba(99, 102, 241, 0.1);
+    --accent-subtle: rgba(99, 102, 241, 0.25);
+    --muted: #94a3b8;
+    --muted-light: #64748b;
+    --section-bg: #0f172a;
+    --surface: #1e293b;
+    --divider: #1e293b;
+    --success: #34d399;
+    --warning: #fbbf24;
+    --danger: #f87171;
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Refined scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--muted-light); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+/* Active nav */
+.nav-active {
+  background: var(--accent-light);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Smooth section fade-in */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fadeUp 0.5s ease-out both;
+}
+
+/* Gradient text helper */
+.text-gradient {
+  background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 50%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Hero mesh gradient */
+.hero-gradient {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99,102,241,0.15), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 50%, rgba(168,85,247,0.08), transparent),
+    radial-gradient(ellipse 50% 50% at 20% 80%, rgba(59,130,246,0.06), transparent);
+}
+
+@media (prefers-color-scheme: dark) {
+  .hero-gradient {
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99,102,241,0.2), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 50%, rgba(168,85,247,0.1), transparent),
+      radial-gradient(ellipse 50% 50% at 20% 80%, rgba(59,130,246,0.08), transparent);
+  }
 }
