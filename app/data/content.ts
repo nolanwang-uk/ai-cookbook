@@ -691,6 +691,158 @@ export const sections: Section[] = [
       },
     ],
   },
+  // NEW SECTION: TRENDING TOPICS
+  {
+    id: "trending",
+    title: { zh: "热门趋势", en: "Trending Topics" },
+    emoji: "🔥",
+    phase: { zh: "前沿 · 持续更新", en: "Trending · Ongoing Updates" },
+    description: {
+      zh: "AI 领域日新月异。这里汇集了最新的热门话题、工具和应用，帮助你快速跟上时代步伐。",
+      en: "The AI field evolves rapidly. This section covers the latest trending topics, tools, and applications to help you stay up-to-date.",
+    },
+    subgroups: [
+      {
+        label: { zh: "AI 智能体", en: "AI Agents" },
+        topics: [
+          {
+            id: "agent-revolution",
+            title: { zh: "AI 智能体革命", en: "Agent Revolution" },
+            difficulty: { zh: "中级", en: "Intermediate" },
+            duration: { zh: "2-3 个月", en: "2-3 months" },
+            why: {
+              zh: "AI 智能体正在改变我们与计算机交互的方式，从简单的问答到自主执行复杂任务。",
+              en: "AI agents are transforming how we interact with computers, from simple Q&A to autonomous execution of complex tasks.",
+            },
+            concepts: {
+              zh: ["智能体架构：感知、思考、行动循环", "工具使用：函数调用、API 集成", "记忆系统：短期上下文、长期向量数据库", "多智能体协作：团队合作与分工", "规划与推理：从思维链到思维树", "协议：MCP、A2A、Model Context Protocol"],
+              en: ["Agent architecture: perception, reasoning, action loop", "Tool use: function calling, API integration", "Memory systems: short-term context, long-term vector DB", "Multi-agent collaboration: teamwork and division of labor", "Planning and reasoning: from chain-of-thought to tree-of-thought", "Protocols: MCP, A2A, Model Context Protocol"],
+            },
+            resources: [
+              { name: { zh: "Lilian Weng: LLM 驱动的自主智能体", en: "Lilian Weng: LLM Powered Autonomous Agents" }, url: "https://lilianweng.github.io/posts/2023-06-23-agent/" },
+              { name: { zh: "LangChain 文档", en: "LangChain Documentation" }, url: "https://python.langchain.com/docs/" },
+              { name: { zh: "Model Context Protocol 官方文档", en: "Model Context Protocol Official Docs" }, url: "https://modelcontextprotocol.io/" },
+            ],
+            zhResources: [
+              { name: "AI 智能体从入门到实战（B站）", url: "https://www.bilibili.com/video/BV..." }, // Placeholder for actual Chinese resource
+            ],
+          },
+          {
+            id: "agent-frameworks",
+            title: { zh: "主流智能体框架", en: "Agent Frameworks" },
+            difficulty: { zh: "入门", en: "Beginner" },
+            duration: { zh: "1-2 个月", en: "1-2 months" },
+            prereqs: { zh: "Python 基础、LLM 基础概念", en: "Python basics, LLM fundamentals" },
+            concepts: {
+              zh: ["LangChain / LangGraph：构建智能体的瑞士军刀", "AutoGen：微软的多智能体协作框架", "CrewAI：角色导向智能体框架", "BabyAGI：任务驱动的智能体原型", "MetaGPT：多-agent 系统模拟公司结构"],
+              en: ["LangChain / LangGraph: the Swiss Army knife for building agents", "AutoGen: Microsoft's multi-agent collaboration framework", "CrewAI: role-based agent framework", "BabyAGI: task-driven agent prototype", "MetaGPT: multi-agent system simulating company structure"],
+            },
+            resources: [
+              { name: { zh: "LangChain 官方教程", en: "LangChain Official Tutorials" }, url: "https://langchain.dev/tutorials/" },
+              { name: { zh: "AutoGen 文档", en: "AutoGen Documentation" }, url: "https://microsoft.github.io/autogen/" },
+              { name: { zh: "CrewAI 文档", en: "CrewAI Documentation" }, url: "https://crewai.com/" },
+            ],
+            zhResources: [
+              { name: "国产智能体框架：ChatGLM 智能体、Baidu 飞桨智能体", url: "https://github.com..." },
+            ],
+          },
+        ],
+      },
+      {
+        label: { zh: "Vibe Coding", en: "Vibe Coding" },
+        topics: [
+          {
+            id: "vibe-coding",
+            title: { zh: "Vibe Coding 革命", en: "Vibe Coding Revolution" },
+            difficulty: { zh: "入门", en: "Beginner" },
+            duration: { zh: "1-2 个月", en: "1-2 months" },
+            why: {
+              zh: "Vibe Coding 是 AI 辅助编程的新范式，让开发者用自然语言描述需求，AI 自动生成代码。",
+              en: "Vibe Coding is the new paradigm of AI-assisted programming that lets developers describe requirements in natural language and have AI generate code automatically.",
+            },
+            concepts: {
+              zh: ["自然语言到代码：从描述到实现", "AI 配偶：Claude Code、Cursor、Windsurf", "即时反馈：AI 实时生成、修复代码", "代码理解：AI 阅读并解释代码", "项目管理：AI 规划开发路线", "Vibe 文化：拥抱混乱、快速迭代"],
+              en: ["Natural language to code: from description to implementation", "AI pair programmers: Claude Code, Cursor, Windsurf", "Instant feedback: AI generates and fixes code in real-time", "Code comprehension: AI reads and explains code", "Project management: AI plans development roadmap", "Vibe culture: embracing chaos, rapid iteration"],
+            },
+            resources: [
+              { name: { zh: "Claude Code 官方文档", en: "Claude Code Official Documentation" }, url: "https://code.anthropic.com/" },
+              { name: { zh: "Cursor 文档", en: "Cursor Documentation" }, url: "https://cursor.sh/docs" },
+              { name: { zh: "Windsurf 文档", en: "Windsurf Documentation" }, url: "https://codeium.com/windsurf" },
+              { name: { zh: "Vibe Coding 入门指南", en: "Vibe Coding Primer" }, url: "https://example.com/vibe-coding" },
+            ],
+            zhResources: [
+              { name: "国内 AI 编程助手：CodeGeeX、Step、TypeAI", url: "https://codegeex.cn/" },
+            ],
+          },
+          {
+            id: "agent-coding",
+            title: { zh: "智能体编程", en: "Agent Programming" },
+            difficulty: { zh: "中级", en: "Intermediate" },
+            duration: { zh: "2-3 个月", en: "2-3 months" },
+            prereqs: { zh: "Python 编程、基础 AI 概念", en: "Python programming, basic AI concepts" },
+            concepts: {
+              zh: ["AI 作为团队成员：智能体接管开发任务", "自动规划：从需求到实现路径", "代码生成：AI 编写完整功能模块", "测试与调试：AI 自动测试和修复", "部署与运维：AI 管理生产环境", "协作模式：人类 + AI 团队协作"],
+              en: ["AI as team member: agents taking over development tasks", "Automated planning: from requirements to implementation path", "Code generation: AI writes complete feature modules", "Testing and debugging: AI automated testing and fixing", "Deployment and operations: AI manages production environment", "Collaboration patterns: human + AI team collaboration"],
+            },
+            resources: [
+              { name: { zh: "SWE-Agent 论文", en: "SWE-Agent Paper" }, url: "https://arxiv.org/abs/..." },
+              { name: { zh: "OpenDevin 文档", en: "OpenDevin Documentation" }, url: "https://opendevin.com/" },
+              { name: { zh: "Devin 演示视频", en: "Devin Demo Video" }, url: "https://www.youtube.com/watch?v=..." },
+            ],
+            zhResources: [
+              { name: "国内 AI 软件工程师：MaaS、AI 开发助手", url: "https://..." },
+            ],
+          },
+        ],
+      },
+      {
+        label: { zh: "应用与案例", en: "Applications & Cases" },
+        topics: [
+          {
+            id: "agent-apps",
+            title: { zh: "智能体应用案例", en: "Agent Applications" },
+            difficulty: { zh: "入门", en: "Beginner" },
+            duration: { zh: "1-2 个月", en: "1-2 months" },
+            why: {
+              zh: "从自动化测试到内容生成，AI 智能体正在各个领域创造价值。",
+              en: "From automated testing to content generation, AI agents are creating value across domains.",
+            },
+            concepts: {
+              zh: ["自动化测试：智能测试智能体", "内容生成：文章、代码、设计自动化", "数据分析：自动洞察与报告", "客户服务：智能客服与支持", "个人助理：日程管理、邮件处理", "研究助手：文献调研、实验设计"],
+              en: ["Automated testing: intelligent test agents", "Content generation: automated articles, code, design", "Data analysis: automatic insights and reporting", "Customer service: intelligent support agents", "Personal assistant: schedule management, email handling", "Research assistant: literature review, experiment design"],
+            },
+            resources: [
+              { name: { zh: "AI Agent Use Cases 集合", en: "AI Agent Use Cases Collection" }, url: "https://github.com/agents/awesome-agents" },
+              { name: { zh: "AutoGPT 应用案例", en: "AutoGPT Use Cases" }, url: "https://github.com/Significant-Gravitas/Auto-GPT" },
+              { name: { zh: "BabyAGI 应用案例", en: "BabyAGI Use Cases" }, url: "https://github.com/yoheinakajima/babyagi" },
+            ],
+            zhResources: [
+              { name: "国内 AI 智能体应用：智能客服、智能写作、智能助理", url: "https://..." },
+            ],
+          },
+          {
+            id: "vibe-demos",
+            title: { zh: "Vibe Coding 演示", en: "Vibe Coding Demos" },
+            difficulty: { zh: "入门", en: "Beginner" },
+            duration: { zh: "1-2 周", en: "1-2 weeks" },
+            concepts: {
+              zh: ["从零构建 Web 应用：AI 写前端后端", "游戏开发：AI 生成游戏逻辑和资源", "数据分析：AI 处理和可视化数据", "自动化脚本：AI 写运维脚本", "移动应用：AI 生成 iOS/Android 应用"],
+              en: ["Build web apps from scratch: AI writes frontend and backend", "Game development: AI generates game logic and assets", "Data analysis: AI processes and visualizes data", "Automation scripts: AI writes DevOps scripts", "Mobile apps: AI generates iOS/Android apps"],
+            },
+            resources: [
+              { name: { zh: "Vibe Coding 视频教程", en: "Vibe Coding Video Tutorials" }, url: "https://www.youtube.com/results?search_query=vibe+coding" },
+              { name: { zh: "Claude Code 演示", en: "Claude Code Demos" }, url: "https://www.youtube.com/watch?v=..." },
+              { name: { zh: "Cursor 演示", en: "Cursor Demos" }, url: "https://www.youtube.com/watch?v=..." },
+            ],
+            zhResources: [
+              { name: "国内 AI 编程演示：CodeGeeX、Step、TypeAI", url: "https://www.bilibili.com/video/BV..." },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  // END NEW SECTION
 ];
 
 /* ════════════════════════════════════════
