@@ -7,6 +7,7 @@ import {
   siteSubtitle,
   roadmapPhases,
   crossResources,
+  learningByStyle,
   mathDependency,
   type Lang,
   type Section,
@@ -336,6 +337,54 @@ function MathDependencyGraph({ lang }: { lang: Lang }) {
   );
 }
 
+/* ─── Learn by Style (live-coding vs. explainers) ─── */
+function LearnByStyle({ lang }: { lang: Lang }) {
+  return (
+    <section id="learn-by-style" className="scroll-mt-24">
+      <div className="flex items-center gap-3 mb-1">
+        <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-[var(--accent-light)] text-lg">🎓</span>
+        <h2 className="text-xl font-bold tracking-tight">{learningByStyle.title[lang]}</h2>
+      </div>
+      <p className="text-sm text-[var(--muted)] pl-12 mb-8">{learningByStyle.subtitle[lang]}</p>
+
+      <div className="space-y-10">
+        {learningByStyle.groups.map((group) => (
+          <div key={group.id} id={group.id} className="scroll-mt-24">
+            <div className="flex items-center gap-2 mb-1.5">
+              <span className="text-lg">{group.emoji}</span>
+              <h3 className="text-base font-semibold tracking-tight">{group.label[lang]}</h3>
+            </div>
+            <p className="text-[13px] text-[var(--muted-light)] mb-4 pl-7">{group.blurb[lang]}</p>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {group.items.map((item, i) => (
+                <a
+                  key={i}
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4 transition-all duration-200 hover:border-[var(--accent-subtle)] hover:shadow-lg hover:shadow-[var(--accent)]/5 hover:-translate-y-0.5"
+                >
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="font-semibold text-sm text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors">
+                      {item.name}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="rounded-md bg-[var(--section-bg)] px-2 py-0.5 text-[10px] font-medium text-[var(--muted)] uppercase tracking-wider">
+                      {item.type[lang]}
+                    </span>
+                    <p className="text-[12px] text-[var(--muted-light)] truncate">{item.desc[lang]}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 /* ─── Resources ─── */
 function Resources({ lang }: { lang: Lang }) {
   return (
@@ -412,6 +461,7 @@ function Sidebar({ lang, activeId }: { lang: Lang; activeId: string }) {
   const navItems = [
     { id: "roadmap", label: `🗺️ ${lang === "zh" ? "学习旅程" : "Journey"}`, indent: false },
     ...sections.map((s) => ({ id: s.id, label: `${s.emoji} ${s.title[lang]}`, indent: false })),
+    { id: "learn-by-style", label: `🎓 ${learningByStyle.title[lang]}`, indent: false },
     { id: "resources", label: `🧰 ${lang === "zh" ? "百宝箱" : "Toolbox"}`, indent: false },
     { id: "discussion", label: `💬 ${lang === "zh" ? "讨论区" : "Discussion"}`, indent: false },
   ];
@@ -509,7 +559,8 @@ export default function Home() {
               <SectionView key={section.id} section={section} lang={lang} />
             ))}
 
-            {/* Toolbox & Discussion */}
+            {/* Learn by style, Toolbox & Discussion */}
+            <LearnByStyle lang={lang} />
             <Resources lang={lang} />
             <Discussion lang={lang} />
           </main>

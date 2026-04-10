@@ -697,6 +697,292 @@ export const sections: Section[] = [
    CROSS-CUTTING RESOURCES
    ════════════════════════════════════════ */
 
+/* ════════════════════════════════════════
+   LEARN BY STYLE — tutorials grouped by
+   teaching style: live-coding vs. explainers
+   ════════════════════════════════════════ */
+
+export interface StyledResource {
+  name: string;
+  type: { zh: string; en: string };
+  desc: { zh: string; en: string };
+  url: string;
+}
+
+export interface StyleGroup {
+  id: string;
+  emoji: string;
+  label: { zh: string; en: string };
+  blurb: { zh: string; en: string };
+  items: StyledResource[];
+}
+
+export const learningByStyle: {
+  title: { zh: string; en: string };
+  subtitle: { zh: string; en: string };
+  groups: StyleGroup[];
+} = {
+  title: { zh: "按学习风格挑课", en: "Learn by Style" },
+  subtitle: {
+    zh: "喜欢跟着敲的实战派，和喜欢先想明白再动手的直觉派 —— 各取所需。",
+    en: "Whether you learn by coding along live or by getting the intuition first, pick what fits your brain.",
+  },
+  groups: [
+    {
+      id: "live-coding",
+      emoji: "⚡",
+      label: { zh: "跟着敲 · 实战直播 & 动手构建 AI 应用", en: "Code Along · Live Builds & Hands-On AI Apps" },
+      blurb: {
+        zh: "项目驱动的教程 —— 打开编辑器，和讲师一起一行一行把 AI 应用写出来。",
+        en: "Project-driven tutorials — open an editor and ship a real AI app alongside the instructor, line by line.",
+      },
+      items: [
+        {
+          name: "Nicholas Renotte",
+          type: { zh: "YouTube", en: "YouTube" },
+          desc: { zh: "端到端 ML/AI 应用直播构建（TF、Streamlit、MERN）", en: "End-to-end ML/AI app live builds (TF, Streamlit, MERN)" },
+          url: "https://www.youtube.com/c/NicholasRenotte",
+        },
+        {
+          name: "sentdex",
+          type: { zh: "YouTube", en: "YouTube" },
+          desc: { zh: "Python ML/DL 实战教程的长青频道", en: "Long-running Python ML/DL hands-on tutorials" },
+          url: "https://www.youtube.com/@sentdex",
+        },
+        {
+          name: "James Briggs",
+          type: { zh: "YouTube", en: "YouTube" },
+          desc: { zh: "LangChain、RAG、向量数据库的代码级演示", en: "Code-level walkthroughs of LangChain, RAG, vector DBs" },
+          url: "https://www.youtube.com/@jamesbriggs",
+        },
+        {
+          name: "AI Jason",
+          type: { zh: "YouTube", en: "YouTube" },
+          desc: { zh: "AI 智能体与 LangGraph 项目从零构建", en: "AI agents and LangGraph projects built from zero" },
+          url: "https://www.youtube.com/@AIJasonZ",
+        },
+        {
+          name: "Umar Jamil",
+          type: { zh: "YouTube", en: "YouTube" },
+          desc: { zh: "从零 PyTorch 复刻 Transformer / LLaMA / SD（长视频深讲）", en: "From-scratch PyTorch reimplementations of Transformer / LLaMA / SD" },
+          url: "https://www.youtube.com/@umarjamilai",
+        },
+        {
+          name: "LangChain (Official)",
+          type: { zh: "YouTube", en: "YouTube" },
+          desc: { zh: "框架作者亲自示范 LangChain / LangGraph 用法", en: "Framework creators demoing LangChain / LangGraph step by step" },
+          url: "https://www.youtube.com/@LangChain",
+        },
+        {
+          name: "Mastering LLMs (Hamel Husain)",
+          type: { zh: "免费课程", en: "Free Course" },
+          desc: { zh: "实战派讲师的 LLM 评估、RAG、微调工作坊合集", en: "Practitioner workshops on LLM evals, RAG, fine-tuning" },
+          url: "https://hamel.dev/blog/posts/course/",
+        },
+        {
+          name: "Full Stack Deep Learning",
+          type: { zh: "课程", en: "Course" },
+          desc: { zh: "LLM Bootcamp：从原型到生产的全流程实战", en: "LLM Bootcamp: prototype → production, the full lifecycle" },
+          url: "https://fullstackdeeplearning.com/",
+        },
+        {
+          name: "DeepLearning.AI Short Courses",
+          type: { zh: "短课程", en: "Short Courses" },
+          desc: { zh: "1 小时动手短课（LangChain、RAG、Agents 等）", en: "~1-hour hands-on courses (LangChain, RAG, Agents, more)" },
+          url: "https://www.deeplearning.ai/short-courses/",
+        },
+      ],
+    },
+    {
+      id: "intuitive-explainers",
+      emoji: "💡",
+      label: { zh: "直觉派 · 趣味讲解与可视化", en: "Intuition First · Fun Explainers & Visuals" },
+      blurb: {
+        zh: "先想明白再动手 —— 这些创作者擅长把复杂概念讲成人话，配图生动。",
+        en: "Understand before you code — creators who turn dense ideas into clear mental pictures.",
+      },
+      items: [
+        {
+          name: "StatQuest with Josh Starmer",
+          type: { zh: "YouTube", en: "YouTube" },
+          desc: { zh: "“BAM!”风格把统计与 ML 讲到极致友好", en: "Friendly “BAM!” breakdowns of stats & ML concepts" },
+          url: "https://www.youtube.com/@statquest",
+        },
+        {
+          name: "Jay Alammar — Illustrated Blog",
+          type: { zh: "博客", en: "Blog" },
+          desc: { zh: "《图解 Transformer》系列的开创者", en: "Home of The Illustrated Transformer / GPT-2 / Word2vec" },
+          url: "https://jalammar.github.io/",
+        },
+        {
+          name: "Yannic Kilcher",
+          type: { zh: "YouTube", en: "YouTube" },
+          desc: { zh: "热门论文逐页解读与吐槽", en: "Page-by-page paper walkthroughs with sharp commentary" },
+          url: "https://www.youtube.com/@YannicKilcher",
+        },
+        {
+          name: "AI Coffee Break with Letitia",
+          type: { zh: "YouTube", en: "YouTube" },
+          desc: { zh: "咖啡杯长度的前沿 AI 概念短讲", en: "Bite-sized, coffee-break-length cutting-edge explainers" },
+          url: "https://www.youtube.com/@AICoffeeBreak",
+        },
+        {
+          name: "Sebastian Raschka — Ahead of AI",
+          type: { zh: "博客/通讯", en: "Blog/Newsletter" },
+          desc: { zh: "LLM 论文与技术的清晰深度总结", en: "Clear, deep write-ups of LLM papers and techniques" },
+          url: "https://magazine.sebastianraschka.com/",
+        },
+        {
+          name: "Machine Learning Street Talk",
+          type: { zh: "播客", en: "Podcast" },
+          desc: { zh: "与顶尖研究者的长篇深度对话", en: "Long-form, deep interviews with top researchers" },
+          url: "https://www.youtube.com/@MachineLearningStreetTalk",
+        },
+        {
+          name: "Two Minute Papers",
+          type: { zh: "YouTube", en: "YouTube" },
+          desc: { zh: "“Dear Fellow Scholars!” —— 新论文的激动人心速览", en: "“Dear Fellow Scholars!” — excited tours of fresh papers" },
+          url: "https://www.youtube.com/@TwoMinutePapers",
+        },
+        {
+          name: "Computerphile",
+          type: { zh: "YouTube", en: "YouTube" },
+          desc: { zh: "由实际研究者讲解 CS 与 AI 的经典频道", en: "Classic channel with researchers explaining CS & AI topics" },
+          url: "https://www.youtube.com/@Computerphile",
+        },
+      ],
+    },
+    {
+      id: "chinese-taiwan",
+      emoji: "🀄",
+      label: { zh: "华语与台湾创作者 · 中文友好的优质课程", en: "Chinese & Taiwan Creators · Top-Tier Mandarin Learning" },
+      blurb: {
+        zh: "来自两岸的顶级老师与社区 —— 中文原生讲解，既有手把手直播敲代码，也有把论文讲成故事的高手。",
+        en: "The best Mandarin-language instructors and communities across the strait — hands-on live coding and story-style paper walkthroughs, all natively in Chinese.",
+      },
+      items: [
+        {
+          name: "李宏毅 Hung-yi Lee — 台大",
+          type: { zh: "YouTube / 课程", en: "YouTube / Course" },
+          desc: {
+            zh: "華語界最出名的 ML/DL 課程，講解生動、作業扎實",
+            en: "Most famous Mandarin ML/DL course — lively explanations, solid labs",
+          },
+          url: "https://www.youtube.com/@HungyiLeeNTU",
+        },
+        {
+          name: "生成式AI時代下的機器學習 2025",
+          type: { zh: "台大课程", en: "NTU Course" },
+          desc: {
+            zh: "李宏毅老師 2025 春季課程主頁（投影片＋作業）",
+            en: "Hung-yi Lee's 2025 spring course page (slides + assignments)",
+          },
+          url: "https://speech.ee.ntu.edu.tw/~hylee/ml/2025-spring.php",
+        },
+        {
+          name: "林軒田 — 機器學習基石",
+          type: { zh: "Coursera", en: "Coursera" },
+          desc: {
+            zh: "台大經典 ML 入門課，理論扎實、講解清晰",
+            en: "NTU's classic ML foundations course — rigorous and crystal clear",
+          },
+          url: "https://www.coursera.org/learn/ntumlone-mathematicalfoundations",
+        },
+        {
+          name: "林軒田 — 機器學習技法",
+          type: { zh: "Coursera", en: "Coursera" },
+          desc: {
+            zh: "《基石》的進階續集，講 SVM / 核方法 / 集成學習",
+            en: "Sequel to Foundations — SVM, kernel methods, ensemble learning",
+          },
+          url: "https://www.coursera.org/learn/machine-learning-techniques",
+        },
+        {
+          name: "陳縕儂 Vivian · NTU MiuLab",
+          type: { zh: "YouTube", en: "YouTube" },
+          desc: {
+            zh: "台大《應用深度學習 ADL》完整課程，含 RAG、後訓練等新內容",
+            en: "NTU's Applied Deep Learning course — includes RAG, post-training, more",
+          },
+          url: "https://www.youtube.com/c/VivianNTUMiuLab",
+        },
+        {
+          name: "跟李沐学AI",
+          type: { zh: "B站", en: "Bilibili" },
+          desc: {
+            zh: "《动手学深度学习》作者李沐的直播课 —— 边讲边写 PyTorch",
+            en: "Mu Li (D2L author) live-streams — explaining and coding PyTorch together",
+          },
+          url: "https://space.bilibili.com/1567748478/",
+        },
+        {
+          name: "动手学深度学习 D2L",
+          type: { zh: "开源书 / 课程", en: "Open Book / Course" },
+          desc: {
+            zh: "配套教材＋PyTorch/MXNet/PaddlePaddle 代码，被 200+ 高校采用",
+            en: "The companion textbook with full runnable code, used at 200+ universities",
+          },
+          url: "https://zh-v2.d2l.ai/",
+        },
+        {
+          name: "同济子豪兄",
+          type: { zh: "B站", en: "Bilibili" },
+          desc: {
+            zh: "同济大学硕士，CV/NLP/图神经网络的高质量精讲 UP 主",
+            en: "Tongji University MS — high-quality CV/NLP/GNN explainer videos",
+          },
+          url: "https://space.bilibili.com/1900783/",
+        },
+        {
+          name: "王木头学科学",
+          type: { zh: "B站", en: "Bilibili" },
+          desc: {
+            zh: "把神经网络、Transformer 讲成数学直觉故事的宝藏 UP 主",
+            en: "Turns neural nets and Transformers into intuitive mathematical stories",
+          },
+          url: "https://space.bilibili.com/504715181/",
+        },
+        {
+          name: "邱锡鹏《神经网络与深度学习》",
+          type: { zh: "开源书", en: "Open Book" },
+          desc: {
+            zh: "复旦邱锡鹏教授的中文经典「蒲公英书」，免费 PDF + PPT",
+            en: "Fudan Prof. Qiu's classic Chinese \"Dandelion Book\" — free PDF + slides",
+          },
+          url: "https://nndl.github.io/",
+        },
+        {
+          name: "Datawhale",
+          type: { zh: "学习社区", en: "Community" },
+          desc: {
+            zh: "国内最大开源 AI 学习社区，免费 LLM / Agent / RAG 实战教程",
+            en: "China's largest open AI learning community — free LLM/Agent/RAG tutorials",
+          },
+          url: "https://www.datawhale.cn/",
+        },
+        {
+          name: "Datawhale GitHub",
+          type: { zh: "GitHub", en: "GitHub" },
+          desc: {
+            zh: "self-llm、llm-cookbook、llm-universe 等 20+ 开源教程仓库",
+            en: "20+ open repos: self-llm, llm-cookbook, llm-universe, and more",
+          },
+          url: "https://github.com/datawhalechina",
+        },
+        {
+          name: "CS自学指南 csdiy.wiki",
+          type: { zh: "指南", en: "Guide" },
+          desc: {
+            zh: "中文 CS/AI 自学资源导航，含李宏毅、MIT、Stanford 等课程指南",
+            en: "Chinese-language CS/AI self-study guide — curated walkthroughs of top courses",
+          },
+          url: "https://csdiy.wiki/",
+        },
+      ],
+    },
+  ],
+};
+
 export const crossResources = {
   title: { zh: "百宝箱", en: "Toolbox" },
   subtitle: { zh: "无论你在哪个阶段，这些资源都值得收藏。", en: "No matter which phase you're in, these resources are worth bookmarking." },
