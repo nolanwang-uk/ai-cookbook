@@ -8,6 +8,7 @@ interface BlogPost {
   slug: string;
   title: string;
   excerpt: string;
+  summary?: string;
   content: string;
   coverImage?: string;
   category: string;
@@ -16,27 +17,39 @@ interface BlogPost {
   tags: string[];
 }
 
-const categoryEmoji: Record<string, string> = {
-  "New AI Tools": "🛠️",
-  "Use Cases": "💡",
-  "Video Explainers": "🎬",
-  "Hot Takes": "🔥",
-  "Research & Papers": "📄",
-  "AI Innovations": "🚀",
-  "Industry News": "📰",
-};
+/* ─── Inline renderer ─── */
+function renderInline(text: string): React.ReactNode {
+  const parts: React.ReactNode[] = [];
+  let remaining = text;
+  let k = 0;
+  while (remaining.length > 0) {
+    const bm = remaining.match(/\*\*(.+?)\*\*/);
+    if (bm && (bm.index ?? -1) >= 0) {
+      const idx = bm.index!;
+      if (idx > 0) parts.push(remaining.slice(0, idx));
+      parts.push(<strong key={k++}>{bm[1]}</strong>);
+      remaining = remaining.slice(idx + bm[0].length);
+      continue;
+    }
+    const cm = remaining.match(/`([^`]+)`/);
+    if (cm && (cm.index ?? -1) >= 0) {
+      const idx = cm.index!;
+      if (idx > 0) parts.push(remaining.slice(0, idx));
+      parts.push(
+        <code key={k++} className="bg-[var(--section-bg)] px-1.5 py-0.5 rounded text-[13px] font-mono text-[var(--accent)]">
+          {cm[1]}
+        </code>
+      );
+      remaining = remaining.slice(idx + cm[0].length);
+      continue;
+    }
+    parts.push(remaining);
+    remaining = "";
+  }
+  return parts.length === 1 && typeof parts[0] === "string" ? parts[0] : <>{parts}</>;
+}
 
-const categoryColor: Record<string, string> = {
-  "New AI Tools": "bg-blue-50 text-blue-700 ring-blue-600/10 dark:bg-blue-500/10 dark:text-blue-400",
-  "Use Cases": "bg-emerald-50 text-emerald-700 ring-emerald-600/10 dark:bg-emerald-500/10 dark:text-emerald-400",
-  "Video Explainers": "bg-violet-50 text-violet-700 ring-violet-600/10 dark:bg-violet-500/10 dark:text-violet-400",
-  "Hot Takes": "bg-rose-50 text-rose-700 ring-rose-600/10 dark:bg-rose-500/10 dark:text-rose-400",
-  "Research & Papers": "bg-amber-50 text-amber-700 ring-amber-600/10 dark:bg-amber-500/10 dark:text-amber-400",
-  "AI Innovations": "bg-indigo-50 text-indigo-700 ring-indigo-600/10 dark:bg-indigo-500/10 dark:text-indigo-400",
-  "Industry News": "bg-cyan-50 text-cyan-700 ring-cyan-600/10 dark:bg-cyan-500/10 dark:text-cyan-400",
-};
-
-/* ─── Content Renderer ─── */
+/* ─── Full content renderer ─── */
 function renderContent(content: string) {
   const lines = content.split("\n");
   const elements: React.ReactNode[] = [];
@@ -49,9 +62,9 @@ function renderContent(content: string) {
   const flushList = () => {
     if (listItems.length > 0) {
       elements.push(
-        <ul key={`list-${key++}`} className="space-y-2 mb-5 ml-4">
+        <ul key={`list-${key++}`} className="space-y-1.5 mb-5 ml-4">
           {listItems.map((item, i) => (
-            <li key={i} className="text-[15px] leading-relaxed">{renderInline(item.replace(/^- /, ""))}</li>
+            <li key={i} className="text-[15px] leading-relaxed">{renderInline(item.replace(/^- |^# /, ""))}</li>
           ))}
         </ul>
       );
@@ -68,7 +81,7 @@ function renderContent(content: string) {
             {text.trim()}
           </a>
         );
-      } else if (text.includes("---")) {
+      } else if (text.trim().startsWith("---")) {
         elements.push(<hr key={`hr-${key++}`} className="my-8 border-[var(--divider)]" />);
       } else {
         elements.push(
@@ -80,15 +93,15 @@ function renderContent(content: string) {
   };
 
   for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
-    const trimmed = line.trim();
+    const trimmed = lines[i].trim();
 
-    // Code blocks
     if (trimmed.startsWith("```")) {
       if (inCodeBlock) {
+        const lang = codeLines[0];
+        const code = lang && codeLines.length > 1 ? codeLines.slice(1).join("\n") : codeLines.join("\n");
         elements.push(
-          <pre key={`code-${key++}`} className="bg-[var(--section-bg)] rounded-lg p-4 mb-5 overflow-x-auto text-sm font-mono text-[var(--foreground)]">
-            {codeLines.join("\n")}
+          <pre key={`code-${key++}`} className="bg-[var(--section-bg)] rounded-lg p-4 mb-5 overflow-x-auto text-sm font-mono text-[var(--foreground)] leading-relaxed">
+            {code || codeLines.join("\n")}
           </pre>
         );
         codeLines = [];
@@ -100,27 +113,27 @@ function renderContent(content: string) {
       }
       continue;
     }
-
     if (inCodeBlock) {
-      codeLines.push(trimmed);
+      codeLines.push(lines[i]);
       continue;
     }
 
-    // Headings
-    if (trimmed.startsWith("### ")) {
+    // H2
+    if (trimmed.startsWith("## ") && !trimmed.startsWith("### ")) {
       flushList();
       flushPara();
       elements.push(
-        <h3 key={`h3-${key++}`} className="text-xl font-semibold mt-10 mb-3 text-[var(--foreground)]">{trimmed.slice(4)}</h3>
+        <h2 key={`h2-${key++}`} className="text-2xl font-bold mt-12 mb-4 text-[var(--foreground)]">{trimmed.slice(3)}</h2>
       );
       continue;
     }
 
-    if (trimmed.startsWith("## ")) {
+    // H3
+    if (trimmed.startsWith("### ")) {
       flushList();
       flushPara();
       elements.push(
-        <h2 key={`h2-${key++}`} className="text-2xl font-bold mt-10 mb-4 text-[var(--foreground)]">{trimmed.slice(3)}</h2>
+        <h3 key={`h3-${key++}`} className="text-xl font-semibold mt-8 mb-3 text-[var(--foreground)]">{trimmed.slice(4)}</h3>
       );
       continue;
     }
@@ -129,25 +142,24 @@ function renderContent(content: string) {
     if (trimmed.startsWith("> ")) {
       flushList();
       flushPara();
-      const quoteText = trimmed.slice(2);
       elements.push(
         <blockquote key={`bq-${key++}`} className="border-l-4 border-[var(--accent)] pl-5 pr-4 py-3 my-5 bg-[var(--accent)]/5 rounded-r-lg italic text-[var(--muted)] text-[15px] leading-relaxed">
-          {renderInline(quoteText)}
+          {renderInline(trimmed.slice(2))}
         </blockquote>
       );
       continue;
     }
 
-    // Bold headers like **Text:**
-    if (trimmed.startsWith("**") && trimmed.includes("**")) {
+    // Bold headings
+    if (trimmed.startsWith("**") && trimmed.includes("**") && (trimmed.endsWith("**") || trimmed.includes(":"))) {
       flushList();
       flushPara();
-      const boldPart = trimmed.match(/\*\*(.+?)\*\*/);
-      if (boldPart) {
-        const rest = trimmed.replace(/\*\*(.+?)\*\*\s*/, "");
+      const boldMatch = trimmed.match(/\*\*(.+?)\*\*/);
+      if (boldMatch) {
+        const rest = trimmed.replace(/\*\*(.+?)\*\*\s*/, "").trim();
         elements.push(
           <div key={`bold-${key++}`} className="mt-6 mb-2">
-            <strong className="text-[16px] text-[var(--foreground)]">{boldPart[1]}</strong>
+            <strong className="text-[16px] text-[var(--foreground)]">{boldMatch[1]}</strong>
             {rest && <span className="text-[15px] text-[var(--muted)] ml-2">{renderInline(rest)}</span>}
           </div>
         );
@@ -174,77 +186,24 @@ function renderContent(content: string) {
     paraLines.push(trimmed);
   }
 
-  // Flush remaining
   flushList();
   flushPara();
-
   return elements;
 }
 
-/* ─── Inline renderer for bold/italic/links within text ─── */
-function renderInline(text: string): React.ReactNode {
-  const parts: React.ReactNode[] = [];
-  let remaining = text;
-  let k = 0;
-
-  while (remaining.length > 0) {
-    // Bold
-    const boldMatch = remaining.match(/\*\*(.+?)\*\*/);
-    if (boldMatch && (boldMatch.index === 0 || boldMatch.index !== undefined)) {
-      const idx = boldMatch.index ?? -1;
-      if (idx > 0) {
-        parts.push(remaining.slice(0, idx));
-      }
-      parts.push(<strong key={k++}>{boldMatch[1]}</strong>);
-      remaining = remaining.slice(idx + boldMatch[0].length);
-      continue;
-    }
-    // Inline code
-    const codeMatch = remaining.match(/`([^`]+)`/);
-    if (codeMatch && (codeMatch.index ?? -1) >= 0) {
-      const idx = codeMatch.index ?? -1;
-      if (idx > 0) {
-        parts.push(remaining.slice(0, idx));
-      }
-      parts.push(
-        <code key={k++} className="bg-[var(--section-bg)] px-1.5 py-0.5 rounded text-[13px] font-mono text-[var(--accent)]">
-          {codeMatch[1]}
-        </code>
-      );
-      remaining = remaining.slice(idx + codeMatch[0].length);
-      continue;
-    }
-    // Link
-    const linkMatch = remaining.match(/\[(.+?)\]\((.+?)\)/);
-    if (linkMatch && (linkMatch.index ?? -1) >= 0) {
-      const idx = linkMatch.index ?? -1;
-      if (idx > 0) {
-        parts.push(remaining.slice(0, idx));
-      }
-      parts.push(
-        <a key={k++} href={linkMatch[2]} target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">
-          {linkMatch[1]}
-        </a>
-      );
-      remaining = remaining.slice(idx + linkMatch[0].length);
-      continue;
-    }
-    // Em dash
-    if (remaining.includes("\u2014")) {
-      const idx = remaining.indexOf("\u2014");
-      if (idx > 0) {
-        parts.push(remaining.slice(0, idx));
-      }
-      parts.push(<span key={k++}>—</span>);
-      remaining = remaining.slice(idx + 1);
-      continue;
-    }
-    parts.push(remaining);
-    remaining = "";
-  }
-
-  return parts.length === 1 && typeof parts[0] === "string" ? parts[0] : <>{parts}</>;
-}
+const categoryEmoji: Record<string, string> = {
+  "New AI Tools": "🛠️", "Use Cases": "💡", "Video Explainers": "🎬",
+  "Hot Takes": "🔥", "Research & Papers": "📄", "AI Innovations": "🚀", "Industry News": "📰",
+};
+const categoryColor: Record<string, string> = {
+  "New AI Tools": "bg-blue-50 text-blue-700 ring-blue-600/10 dark:bg-blue-500/10 dark:text-blue-400",
+  "Use Cases": "bg-emerald-50 text-emerald-700 ring-emerald-600/10 dark:bg-emerald-500/10 dark:text-emerald-400",
+  "Video Explainers": "bg-violet-50 text-violet-700 ring-violet-600/10 dark:bg-violet-500/10 dark:text-violet-400",
+  "Hot Takes": "bg-rose-50 text-rose-700 ring-rose-600/10 dark:bg-rose-500/10 dark:text-rose-400",
+  "Research & Papers": "bg-amber-50 text-amber-700 ring-amber-600/10 dark:bg-amber-500/10 dark:text-amber-400",
+  "AI Innovations": "bg-indigo-50 text-indigo-700 ring-indigo-600/10 dark:bg-indigo-500/10 dark:text-indigo-400",
+  "Industry News": "bg-cyan-50 text-cyan-700 ring-cyan-600/10 dark:bg-cyan-500/10 dark:text-cyan-400",
+};
 
 /* ─── Page Component ─── */
 export default function BlogPostPage() {
@@ -254,21 +213,13 @@ export default function BlogPostPage() {
   const [post, setPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const fetchPost = useCallback(async () => {
-    try {
-      const res = await fetch(`/api/posts/${slug}`);
-      if (!res.ok) throw new Error("Post not found");
-      setPost(await res.json());
-    } catch (err) {
-      console.error("Error fetching post:", err);
-    } finally {
-      setLoading(false);
-    }
-  }, [slug]);
-
   useEffect(() => {
-    if (slug) fetchPost();
-  }, [fetchPost, slug]);
+    if (!slug) return;
+    fetch(`/api/posts/${slug}`)
+      .then((res) => res.json())
+      .then((data) => { setPost(data); setLoading(false); })
+      .catch((err) => { console.error("Error fetching post:", err); setLoading(false); });
+  }, [slug]);
 
   if (loading) {
     return (
@@ -322,18 +273,23 @@ export default function BlogPostPage() {
       <article className="mx-auto max-w-3xl px-6 py-8 lg:py-12">
         {/* Cover Image */}
         {post.coverImage && (
-          <div className="rounded-2xl overflow-hidden mb-8 border border-[var(--card-border)]">
-            <img
-              src={post.coverImage}
-              alt={post.title}
-              className="w-full aspect-[16/9] object-cover"
-            />
+          <div className="rounded-2xl overflow-hidden mb-8 border border-[var(--card-border)] shadow-lg shadow-black/[0.04]">
+            <img src={post.coverImage} alt={post.title} className="w-full aspect-[16/9] object-cover" />
+          </div>
+        )}
+
+        {/* Summary card under cover image */}
+        {(post.summary || post.excerpt) && (
+          <div className="rounded-xl border border-[var(--accent-subtle)] bg-[var(--accent)]/5 p-5 mb-8">
+            <p className="text-[15px] text-[var(--foreground)] leading-relaxed font-medium">
+              {post.summary || post.excerpt}
+            </p>
           </div>
         )}
 
         {/* Meta badges */}
         <div className="flex flex-wrap items-center gap-2 mb-4">
-          <span className={`inline-flex items-center gap-1 rounded-md px-3 py-1 text-[12px] font-semibold ring-1 ring-inset ${categoryColor[post.category] || "bg-gray-50 text-gray-700 ring-gray-600/10"}`}>
+          <span className={`inline-flex items-center gap-1 rounded-md px-3 py-1 text-[12px] font-semibold ring-1 ring-inset ${categoryColor[post.category] || "bg-gray-50"}`}>
             {categoryEmoji[post.category]} {post.category}
           </span>
           {post.tags.map((tag) => (
@@ -347,11 +303,6 @@ export default function BlogPostPage() {
         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-[1.15] mb-5">
           {post.title}
         </h1>
-
-        {/* Excerpt */}
-        <p className="text-[17px] text-[var(--muted)] leading-relaxed mb-6 pb-6 border-b border-[var(--divider)]">
-          {post.excerpt}
-        </p>
 
         {/* Author line */}
         <div className="flex items-center gap-4 text-sm text-[var(--muted)] mb-10 pb-8 border-b border-[var(--divider)]">
@@ -378,18 +329,14 @@ export default function BlogPostPage() {
           <div className="mt-14 pt-8 border-t border-[var(--divider)]">
             <h4 className="text-sm font-semibold uppercase tracking-wider text-[var(--muted-light)] mb-4">📚 Sources & References</h4>
             <div className="space-y-2">
-              {post.sources.map((source, i) => (
-                <a
-                  key={i}
-                  href={source.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+              {post.sources.map((s, i) => (
+                <a key={i} href={s.url} target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-2.5 text-[13px] rounded-lg px-3 py-2 -mx-1 transition-colors hover:bg-[var(--section-bg)] group"
                 >
                   <svg className="w-4 h-4 shrink-0 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                   </svg>
-                  <span className="text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors">{source.name}</span>
+                  <span className="text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors">{s.name}</span>
                 </a>
               ))}
             </div>
@@ -398,15 +345,10 @@ export default function BlogPostPage() {
 
         {/* Footer */}
         <div className="mt-12 pt-8 border-t border-[var(--divider)] flex items-center justify-between">
-          <button
-            onClick={() => router.push("/blog")}
-            className="text-[var(--accent)] hover:underline text-sm font-medium"
-          >
+          <button onClick={() => router.push("/blog")} className="text-[var(--accent)] hover:underline text-sm font-medium">
             ← All Posts
           </button>
-          <p className="text-[11px] text-[var(--muted-light)]">
-            Auto-curated · Published at 8:00 AM CST
-          </p>
+          <p className="text-[11px] text-[var(--muted-light)]">Auto-curated · Published at 8:00 AM CST</p>
         </div>
       </article>
     </div>
