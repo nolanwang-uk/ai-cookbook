@@ -21,7 +21,9 @@ jobs:
           python-version: '3.12'
 
       - name: Generate blog posts
-        run: python scripts/generate-posts.py
+        run: |
+          echo "Shanghai time: $(TZ=Asia/Shanghai date)"
+          python3 scripts/generate-posts.py
         env:
           PYTHONIOENCODING: utf-8
 
