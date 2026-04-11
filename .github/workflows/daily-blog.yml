@@ -1,0 +1,40 @@
+name: Daily AI Blog Posts
+
+on:
+  schedule:
+    - cron: '0 0 * * 1-5'  # Mon-Fri 00:00 UTC = 08:00 CST (Shanghai)
+  workflow_dispatch:  # Allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  generate-posts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Generate blog posts
+        run: python scripts/generate-posts.py
+        env:
+          PYTHONIOENCODING: utf-8
+
+      - name: Check for changes
+        id: diff
+        run: |
+          git diff --quiet app/data/posts.json && echo "changed=false" >> $GITHUB_OUTPUT || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit new posts
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "AI Cookbook Bot"
+          git config user.email "blog@aicookbook.com"
+          git add app/data/posts.json
+          git commit -m "📰 AI Daily: $(TZ=Asia/Shanghai date +%Y-%m-%d)"
+          git push

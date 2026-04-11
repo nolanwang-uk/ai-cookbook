@@ -463,6 +463,7 @@ function Sidebar({ lang, activeId }: { lang: Lang; activeId: string }) {
     ...sections.map((s) => ({ id: s.id, label: `${s.emoji} ${s.title[lang]}`, indent: false })),
     { id: "learn-by-style", label: `🎓 ${learningByStyle.title[lang]}`, indent: false },
     { id: "resources", label: `🧰 ${lang === "zh" ? "百宝箱" : "Toolbox"}`, indent: false },
+    { id: "blog", label: `📰 ${lang === "zh" ? "每日 AI 资讯" : "AI Daily"}`, indent: false, external: true },
     { id: "discussion", label: `💬 ${lang === "zh" ? "讨论区" : "Discussion"}`, indent: false },
   ];
 
@@ -472,14 +473,21 @@ function Sidebar({ lang, activeId }: { lang: Lang; activeId: string }) {
         {lang === "zh" ? "目录" : "Contents"}
       </div>
       {navItems.map((item) => (
-        <a key={item.id} href={`#${item.id}`}
-          className={`rounded-lg px-3 py-1.5 text-[13px] transition-all duration-150 ${
-            activeId === item.id
-              ? "nav-active"
-              : "text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--section-bg)]"
-          }`}>
-          {item.label}
-        </a>
+        item.external ? (
+          <a key={item.id} href={`/blog`}
+            className="rounded-lg px-3 py-1.5 text-[13px] transition-all duration-150 text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--section-bg)]">
+            {item.label}
+          </a>
+        ) : (
+          <a key={item.id} href={`#${item.id}`}
+            className={`rounded-lg px-3 py-1.5 text-[13px] transition-all duration-150 ${
+              activeId === item.id
+                ? "nav-active"
+                : "text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--section-bg)]"
+            }`}>
+            {item.label}
+          </a>
+        )
       ))}
     </nav>
   );
