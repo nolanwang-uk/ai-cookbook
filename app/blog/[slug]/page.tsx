@@ -2,8 +2,6 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { siteTitle } from "../../../data/content";
-import { Lang } from "../../../data/content";
 
 interface BlogPost {
   id: string;
@@ -43,7 +41,6 @@ export default function BlogPostPage() {
   const slug = params.slug as string;
   const [post, setPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
-  const [lang] = useState<Lang>("en");
 
   const fetchPost = useCallback(async () => {
     try {
@@ -53,13 +50,6 @@ export default function BlogPostPage() {
       setPost(data);
     } catch (err) {
       console.error("Error fetching post:", err);
-      try {
-        const bundled = await import("../../../data/posts.json");
-        const found = bundled.default.find((p: BlogPost) => p.slug === slug);
-        if (found) setPost(found);
-      } catch {
-        // no bundled posts
-      }
     } finally {
       setLoading(false);
     }
@@ -107,7 +97,7 @@ export default function BlogPostPage() {
         <div className="mx-auto max-w-7xl flex items-center justify-between px-6 h-14">
           <a href="/" className="flex items-center gap-2.5">
             <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[var(--accent)] text-white text-sm font-bold shadow-sm shadow-[var(--accent)]/20">AI</span>
-            <span className="font-bold text-sm tracking-tight">{siteTitle[lang]}</span>
+            <span className="font-bold text-sm tracking-tight">AI Cookbook</span>
           </a>
           <a href="/blog" className="text-sm text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">
             ← Back to Blog
@@ -139,7 +129,7 @@ export default function BlogPostPage() {
           <span>·</span>
           <span>{new Date(post.publishedAt).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}</span>
           <span>·</span>
-          <span>{Math.ceil(post.content.length / 5 + (post.content.match(/[.!?]/g) || []).length / 200)} min read</span>
+          <span>{Math.ceil(post.content.split(/\s+/).length / 200)} min read</span>
         </div>
 
         {/* Content */}
@@ -158,8 +148,8 @@ export default function BlogPostPage() {
                 </ul>
               );
             }
-            if (trimmed.startsWith("**") && trimmed.endsWith(":**")) {
-              return <strong key={i} className="block text-lg mt-6 mb-2">{trimmed.slice(2, -3)}</strong>;
+            if (trimmed.startsWith("**") && trimmed.includes(":**")) {
+              return <strong key={i} className="block text-lg mt-6 mb-2">{trimmed.replace(/\*\*:/g, ":").replace(/\*\*/g, "")}</strong>;
             }
             if (trimmed.startsWith("> ")) {
               return (
@@ -174,6 +164,9 @@ export default function BlogPostPage() {
                   {trimmed}
                 </a>
               );
+            }
+            if (trimmed.startsWith("```")) {
+              return null; // skip code fence lines for simplicity
             }
             return <p key={i} className="text-[15px] leading-relaxed mb-4">{trimmed}</p>;
           })}
