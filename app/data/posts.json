@@ -174,7 +174,8 @@
       "Education",
       "Karpathy"
     ],
-    "summary": "Weekly curated picks: Karpathy on the real state of LLM agents, Bilibili creators breaking down the latest fine-tuning methods, and honest reviews of AI coding tools from top tech YouTubers."
+    "summary": "Weekly curated picks: Karpathy on the real state of LLM agents, Bilibili creators breaking down the latest fine-tuning methods, and honest reviews of AI coding tools from top tech YouTubers.",
+    "coverImage": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1200&h=630&fit=crop&q=80"
   },
   {
     "id": "016",
@@ -290,7 +291,8 @@
       "IDE",
       "Developer Tools"
     ],
-    "coverImage": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=630&fit=crop&q=80"
+    "coverImage": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=630&fit=crop&q=80",
+    "summary": "The two leading AI-powered IDEs go head-to-head. Cursor dominates in codebase-wide search and agent-mode reliability, while Windsurf excels in conversational UX and multi-step reasoning."
   },
   {
     "id": "003",
@@ -343,7 +345,8 @@
       "Research",
       "Autonomous Agents"
     ],
-    "coverImage": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&h=630&fit=crop&q=80"
+    "coverImage": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&h=630&fit=crop&q=80",
+    "summary": "OpenAI o3 scores 87% on ARC-AGI, shattering benchmarks by 25 points. Deep Research is a fully autonomous agent that browses, reads, synthesizes dozens of sources into comprehensive reports."
   },
   {
     "id": "005",
@@ -369,7 +372,8 @@
       "Course",
       "RAG"
     ],
-    "coverImage": "https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=1200&h=630&fit=crop&q=80"
+    "coverImage": "https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=1200&h=630&fit=crop&q=80",
+    "summary": "The most practical LLM engineering course for 2026 covers prompt patterns, RAG design, function calling, evaluation, and fine-tuning with real-world production patterns."
   },
   {
     "id": "006",

@@ -1,11 +1,20 @@
 #!/usr/bin/env python3
-"""AI Cookbook Blog Post Generator."""
+"""AI Cookbook Blog Post Generator -- produces blog-style posts with cover images, summaries, and rich content."""
 import json
 import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 SHANGHAI_TZ = timezone(timedelta(hours=8))
+
+# Helper to create a complete blog post
+def blog_post(id_, slug, title, excerpt, summary, content, category, date, sources, tags, cover):
+    return {
+        "id": id_, "slug": f"{slug}-{date}", "title": title, "excerpt": excerpt,
+        "summary": summary, "content": content.strip(),
+        "category": category, "publishedAt": f"{date}T08:00:00+08:00",
+        "sources": sources, "tags": tags, "coverImage": cover,
+    }
 
 # Cover images for each post type
 COVER_IMAGES = {
