@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { siteTitle, siteSubtitle } from "../data/content";
+import { siteTitle } from "../data/content";
 import { Lang } from "../data/content";
 
 interface BlogPost {
@@ -10,6 +10,7 @@ interface BlogPost {
   title: string;
   excerpt: string;
   content: string;
+  coverImage?: string;
   category: string;
   publishedAt: string;
   sources: { name: string; url: string }[];
@@ -50,7 +51,6 @@ export default function BlogPage() {
       setPosts(data);
     } catch (err) {
       console.error("Error fetching posts:", err);
-      // Load bundled posts as fallback
       try {
         const bundled = await import("../data/posts.json");
         setPosts(bundled.default);
@@ -145,33 +145,65 @@ export default function BlogPage() {
               <a
                 key={post.id}
                 href={`/blog/${post.slug}`}
-                className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6 transition-all duration-200 hover:border-[var(--accent-subtle)] hover:shadow-lg hover:shadow-[var(--accent)]/5 hover:-translate-y-0.5 block"
+                className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] overflow-hidden transition-all duration-200 hover:border-[var(--accent-subtle)] hover:shadow-lg hover:shadow-[var(--accent)]/5 hover:-translate-y-0.5 block"
               >
-                <div className="flex items-center justify-between mb-3">
-                  <span className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] font-medium ring-1 ring-inset ${categoryColor[post.category] || "bg-gray-50 text-gray-700 ring-gray-600/10"}`}>
-                    {categoryEmoji[post.category]} {post.category}
-                  </span>
-                  <span className="text-[10px] text-[var(--muted)]">
-                    {new Date(post.publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
-                  </span>
-                </div>
-                <h3 className="text-[17px] font-semibold leading-snug mb-2 group-hover:text-[var(--accent)] transition-colors">
-                  {post.title}
-                </h3>
-                <p className="text-[13px] text-[var(--muted)] leading-relaxed line-clamp-3 mb-4">
-                  {post.excerpt}
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex flex-wrap gap-2">
-                    {post.sources.slice(0, 2).map((s, i) => (
-                      <span key={i} className="text-[10px] text-[var(--muted-light)] bg-[var(--section-bg)] px-2 py-0.5 rounded">
-                        {s.name}
+                {/* Cover Image */}
+                {post.coverImage && (
+                  <div className="relative aspect-[16/9] overflow-hidden bg-[var(--section-bg)]">
+                    <img
+                      src={post.coverImage}
+                      alt={post.title}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                    <div className="absolute bottom-3 left-3 flex items-center gap-1.5">
+                      <span className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[10px] font-semibold ring-1 ring-inset ${categoryColor[post.category] || "bg-gray-50 text-gray-700 ring-gray-600/10"}`}>
+                        {categoryEmoji[post.category]} {post.category}
                       </span>
-                    ))}
+                    </div>
                   </div>
-                  <svg className="w-4 h-4 text-[var(--accent)] opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
+                )}
+
+                <div className="p-5">
+                  {/* Category badge (only if no image) */}
+                  {!post.coverImage && (
+                    <div className="flex items-center justify-between mb-3">
+                      <span className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] font-medium ring-1 ring-inset ${categoryColor[post.category] || "bg-gray-50 text-gray-700 ring-gray-600/10"}`}>
+                        {categoryEmoji[post.category]} {post.category}
+                      </span>
+                      <span className="text-[10px] text-[var(--muted)]">
+                        {new Date(post.publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                      </span>
+                    </div>
+                  )}
+
+                  {post.coverImage && (
+                    <div className="flex items-center justify-between mt-3 mb-2">
+                      <span className="text-[10px] text-[var(--muted)]">
+                        {new Date(post.publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                      </span>
+                    </div>
+                  )}
+
+                  <h3 className="text-[17px] font-semibold leading-snug mb-2 group-hover:text-[var(--accent)] transition-colors line-clamp-2">
+                    {post.title}
+                  </h3>
+                  <p className="text-[13px] text-[var(--muted)] leading-relaxed line-clamp-3 mb-4">
+                    {post.excerpt}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex flex-wrap gap-2">
+                      {post.sources.slice(0, 2).map((s, i) => (
+                        <span key={i} className="text-[10px] text-[var(--muted-light)] bg-[var(--section-bg)] px-2 py-0.5 rounded">
+                          {s.name}
+                        </span>
+                      ))}
+                    </div>
+                    <svg className="w-4 h-4 text-[var(--accent)] opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </div>
                 </div>
               </a>
             ))}

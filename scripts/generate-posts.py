@@ -82,8 +82,9 @@ Anthropic's Claude Code CLI is the go-to for terminal-first developers:
             {"name": "Windsurf", "url": "https://codeium.com/windsurf"},
             {"name": "Claude Code", "url": "https://www.anthropic.com/claude-code"},
         ],
-        "tags": ["Cursor", "Windsurf", "Claude Code", "IDE", "Vibe Coding"],
-    }
+            "tags": ["Cursor", "Windsurf", "Claude Code", "IDE", "Vibe Coding"],
+            "coverImage": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=630&fit=crop&q=80",
+        }
 
 
 def post_karpathy(t):

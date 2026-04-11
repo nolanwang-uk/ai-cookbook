@@ -27,7 +27,8 @@
       "Claude Code",
       "IDE",
       "Vibe Coding"
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=630&fit=crop&q=80"
   },
   {
     "id": "011",
@@ -53,7 +54,8 @@
       "YouTube",
       "PyTorch",
       "LLM"
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=1200&h=630&fit=crop&q=80"
   },
   {
     "id": "012",
@@ -78,7 +80,8 @@
       "Deep Learning",
       "LLM",
       "Course"
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=1200&h=630&fit=crop&q=80"
   },
   {
     "id": "013",
@@ -103,7 +106,8 @@
       "Production",
       "Case Studies",
       "ROI"
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=630&fit=crop&q=80"
   },
   {
     "id": "014",
@@ -133,7 +137,8 @@
       "OpenRouter",
       "Ollama",
       "Gemma"
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop&q=80"
   },
   {
     "id": "015",
@@ -188,7 +193,8 @@
       "Coursera",
       "Course",
       "LLM"
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=1200&h=630&fit=crop&q=80"
   },
   {
     "id": "017",
@@ -218,7 +224,8 @@
       "v0",
       "Lovable",
       "Development"
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=630&fit=crop&q=80"
   },
   {
     "id": "001",
@@ -243,7 +250,8 @@
       "Anthropic",
       "Reasoning",
       "LLM"
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=630&fit=crop&q=80"
   },
   {
     "id": "002",
@@ -272,7 +280,8 @@
       "Windsurf",
       "IDE",
       "Developer Tools"
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=630&fit=crop&q=80"
   },
   {
     "id": "003",
@@ -297,7 +306,8 @@
       "LLM",
       "Education",
       "YouTube"
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=1200&h=630&fit=crop&q=80"
   },
   {
     "id": "004",
@@ -322,7 +332,8 @@
       "o3",
       "Research",
       "Autonomous Agents"
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&h=630&fit=crop&q=80"
   },
   {
     "id": "005",
@@ -347,7 +358,8 @@
       "LLM",
       "Course",
       "RAG"
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=1200&h=630&fit=crop&q=80"
   },
   {
     "id": "006",
@@ -376,7 +388,8 @@
       "Bolt",
       "v0",
       "No-Code"
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=630&fit=crop&q=80"
   },
   {
     "id": "007",
@@ -401,7 +414,8 @@
       "Agents",
       "Python",
       "Tutorial"
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=630&fit=crop&q=80"
   },
   {
     "id": "008",
@@ -426,7 +440,8 @@
       "Google",
       "Multimodal",
       "Local AI"
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1558317372-540997fa15f7?w=1200&h=630&fit=crop&q=80"
   },
   {
     "id": "009",
@@ -454,6 +469,7 @@
       "AI Agents",
       "Opinion",
       "Software Development"
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=630&fit=crop&q=80"
   }
 ]

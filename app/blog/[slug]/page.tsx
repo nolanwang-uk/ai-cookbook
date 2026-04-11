@@ -9,6 +9,7 @@ interface BlogPost {
   title: string;
   excerpt: string;
   content: string;
+  coverImage?: string;
   category: string;
   publishedAt: string;
   sources: { name: string; url: string }[];
@@ -35,6 +36,217 @@ const categoryColor: Record<string, string> = {
   "Industry News": "bg-cyan-50 text-cyan-700 ring-cyan-600/10 dark:bg-cyan-500/10 dark:text-cyan-400",
 };
 
+/* ─── Content Renderer ─── */
+function renderContent(content: string) {
+  const lines = content.split("\n");
+  const elements: React.ReactNode[] = [];
+  let inCodeBlock = false;
+  let codeLines: string[] = [];
+  let listItems: string[] = [];
+  let paraLines: string[] = [];
+  let key = 0;
+
+  const flushList = () => {
+    if (listItems.length > 0) {
+      elements.push(
+        <ul key={`list-${key++}`} className="space-y-2 mb-5 ml-4">
+          {listItems.map((item, i) => (
+            <li key={i} className="text-[15px] leading-relaxed">{renderInline(item.replace(/^- /, ""))}</li>
+          ))}
+        </ul>
+      );
+      listItems = [];
+    }
+  };
+
+  const flushPara = () => {
+    if (paraLines.length > 0) {
+      const text = paraLines.join(" ");
+      if (text.trim().match(/^https?:\/\//)) {
+        elements.push(
+          <a key={`link-${key++}`} href={text.trim()} target="_blank" rel="noopener noreferrer" className="block text-[var(--accent)] hover:underline my-3 text-sm break-all">
+            {text.trim()}
+          </a>
+        );
+      } else if (text.includes("---")) {
+        elements.push(<hr key={`hr-${key++}`} className="my-8 border-[var(--divider)]" />);
+      } else {
+        elements.push(
+          <p key={`p-${key++}`} className="text-[15px] leading-relaxed mb-4">{renderInline(text)}</p>
+        );
+      }
+      paraLines = [];
+    }
+  };
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const trimmed = line.trim();
+
+    // Code blocks
+    if (trimmed.startsWith("```")) {
+      if (inCodeBlock) {
+        elements.push(
+          <pre key={`code-${key++}`} className="bg-[var(--section-bg)] rounded-lg p-4 mb-5 overflow-x-auto text-sm font-mono text-[var(--foreground)]">
+            {codeLines.join("\n")}
+          </pre>
+        );
+        codeLines = [];
+        inCodeBlock = false;
+      } else {
+        flushList();
+        flushPara();
+        inCodeBlock = true;
+      }
+      continue;
+    }
+
+    if (inCodeBlock) {
+      codeLines.push(trimmed);
+      continue;
+    }
+
+    // Headings
+    if (trimmed.startsWith("### ")) {
+      flushList();
+      flushPara();
+      elements.push(
+        <h3 key={`h3-${key++}`} className="text-xl font-semibold mt-10 mb-3 text-[var(--foreground)]">{trimmed.slice(4)}</h3>
+      );
+      continue;
+    }
+
+    if (trimmed.startsWith("## ")) {
+      flushList();
+      flushPara();
+      elements.push(
+        <h2 key={`h2-${key++}`} className="text-2xl font-bold mt-10 mb-4 text-[var(--foreground)]">{trimmed.slice(3)}</h2>
+      );
+      continue;
+    }
+
+    // Blockquotes
+    if (trimmed.startsWith("> ")) {
+      flushList();
+      flushPara();
+      const quoteText = trimmed.slice(2);
+      elements.push(
+        <blockquote key={`bq-${key++}`} className="border-l-4 border-[var(--accent)] pl-5 pr-4 py-3 my-5 bg-[var(--accent)]/5 rounded-r-lg italic text-[var(--muted)] text-[15px] leading-relaxed">
+          {renderInline(quoteText)}
+        </blockquote>
+      );
+      continue;
+    }
+
+    // Bold headers like **Text:**
+    if (trimmed.startsWith("**") && trimmed.includes("**")) {
+      flushList();
+      flushPara();
+      const boldPart = trimmed.match(/\*\*(.+?)\*\*/);
+      if (boldPart) {
+        const rest = trimmed.replace(/\*\*(.+?)\*\*\s*/, "");
+        elements.push(
+          <div key={`bold-${key++}`} className="mt-6 mb-2">
+            <strong className="text-[16px] text-[var(--foreground)]">{boldPart[1]}</strong>
+            {rest && <span className="text-[15px] text-[var(--muted)] ml-2">{renderInline(rest)}</span>}
+          </div>
+        );
+      }
+      continue;
+    }
+
+    // Lists
+    if (trimmed.startsWith("- ")) {
+      flushPara();
+      listItems.push(trimmed);
+      continue;
+    }
+
+    // Empty lines
+    if (!trimmed) {
+      flushList();
+      flushPara();
+      continue;
+    }
+
+    // Regular text
+    flushList();
+    paraLines.push(trimmed);
+  }
+
+  // Flush remaining
+  flushList();
+  flushPara();
+
+  return elements;
+}
+
+/* ─── Inline renderer for bold/italic/links within text ─── */
+function renderInline(text: string): React.ReactNode {
+  const parts: React.ReactNode[] = [];
+  let remaining = text;
+  let k = 0;
+
+  while (remaining.length > 0) {
+    // Bold
+    const boldMatch = remaining.match(/\*\*(.+?)\*\*/);
+    if (boldMatch && (boldMatch.index === 0 || boldMatch.index !== undefined)) {
+      const idx = boldMatch.index ?? -1;
+      if (idx > 0) {
+        parts.push(remaining.slice(0, idx));
+      }
+      parts.push(<strong key={k++}>{boldMatch[1]}</strong>);
+      remaining = remaining.slice(idx + boldMatch[0].length);
+      continue;
+    }
+    // Inline code
+    const codeMatch = remaining.match(/`([^`]+)`/);
+    if (codeMatch && (codeMatch.index ?? -1) >= 0) {
+      const idx = codeMatch.index ?? -1;
+      if (idx > 0) {
+        parts.push(remaining.slice(0, idx));
+      }
+      parts.push(
+        <code key={k++} className="bg-[var(--section-bg)] px-1.5 py-0.5 rounded text-[13px] font-mono text-[var(--accent)]">
+          {codeMatch[1]}
+        </code>
+      );
+      remaining = remaining.slice(idx + codeMatch[0].length);
+      continue;
+    }
+    // Link
+    const linkMatch = remaining.match(/\[(.+?)\]\((.+?)\)/);
+    if (linkMatch && (linkMatch.index ?? -1) >= 0) {
+      const idx = linkMatch.index ?? -1;
+      if (idx > 0) {
+        parts.push(remaining.slice(0, idx));
+      }
+      parts.push(
+        <a key={k++} href={linkMatch[2]} target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">
+          {linkMatch[1]}
+        </a>
+      );
+      remaining = remaining.slice(idx + linkMatch[0].length);
+      continue;
+    }
+    // Em dash
+    if (remaining.includes("\u2014")) {
+      const idx = remaining.indexOf("\u2014");
+      if (idx > 0) {
+        parts.push(remaining.slice(0, idx));
+      }
+      parts.push(<span key={k++}>—</span>);
+      remaining = remaining.slice(idx + 1);
+      continue;
+    }
+    parts.push(remaining);
+    remaining = "";
+  }
+
+  return parts.length === 1 && typeof parts[0] === "string" ? parts[0] : <>{parts}</>;
+}
+
+/* ─── Page Component ─── */
 export default function BlogPostPage() {
   const params = useParams();
   const router = useRouter();
@@ -46,8 +258,7 @@ export default function BlogPostPage() {
     try {
       const res = await fetch(`/api/posts/${slug}`);
       if (!res.ok) throw new Error("Post not found");
-      const data = await res.json();
-      setPost(data);
+      setPost(await res.json());
     } catch (err) {
       console.error("Error fetching post:", err);
     } finally {
@@ -79,16 +290,19 @@ export default function BlogPostPage() {
         <div className="text-center">
           <div className="text-4xl mb-4">📭</div>
           <p className="text-[var(--muted)] mb-6">Post not found.</p>
-          <button
-            onClick={() => router.push("/blog")}
-            className="text-sm text-[var(--accent)] hover:underline"
-          >
+          <button onClick={() => router.push("/blog")} className="text-sm text-[var(--accent)] hover:underline">
             Back to Blog
           </button>
         </div>
       </div>
     );
   }
+
+  const wordCount = post.content.split(/\s+/).length;
+  const readMin = Math.max(1, Math.ceil(wordCount / 200));
+  const dateStr = new Date(post.publishedAt).toLocaleDateString("en-US", {
+    weekday: "long", month: "long", day: "numeric", year: "numeric",
+  });
 
   return (
     <div className="min-h-screen">
@@ -100,15 +314,25 @@ export default function BlogPostPage() {
             <span className="font-bold text-sm tracking-tight">AI Cookbook</span>
           </a>
           <a href="/blog" className="text-sm text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">
-            ← Back to Blog
+            ← All Posts
           </a>
         </div>
       </header>
 
-      {/* Article */}
-      <article className="mx-auto max-w-3xl px-6 py-12 lg:py-16">
-        {/* Meta */}
-        <div className="flex flex-wrap items-center gap-2 mb-6">
+      <article className="mx-auto max-w-3xl px-6 py-8 lg:py-12">
+        {/* Cover Image */}
+        {post.coverImage && (
+          <div className="rounded-2xl overflow-hidden mb-8 border border-[var(--card-border)]">
+            <img
+              src={post.coverImage}
+              alt={post.title}
+              className="w-full aspect-[16/9] object-cover"
+            />
+          </div>
+        )}
+
+        {/* Meta badges */}
+        <div className="flex flex-wrap items-center gap-2 mb-4">
           <span className={`inline-flex items-center gap-1 rounded-md px-3 py-1 text-[12px] font-semibold ring-1 ring-inset ${categoryColor[post.category] || "bg-gray-50 text-gray-700 ring-gray-600/10"}`}>
             {categoryEmoji[post.category]} {post.category}
           </span>
@@ -120,62 +344,39 @@ export default function BlogPostPage() {
         </div>
 
         {/* Title */}
-        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-[1.2] mb-4">
+        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-[1.15] mb-5">
           {post.title}
         </h1>
 
-        <div className="flex items-center gap-4 text-sm text-[var(--muted)] mb-8 pb-8 border-b border-[var(--divider)]">
-          <span>AI Cookbook</span>
-          <span>·</span>
-          <span>{new Date(post.publishedAt).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}</span>
-          <span>·</span>
-          <span>{Math.ceil(post.content.split(/\s+/).length / 200)} min read</span>
+        {/* Excerpt */}
+        <p className="text-[17px] text-[var(--muted)] leading-relaxed mb-6 pb-6 border-b border-[var(--divider)]">
+          {post.excerpt}
+        </p>
+
+        {/* Author line */}
+        <div className="flex items-center gap-4 text-sm text-[var(--muted)] mb-10 pb-8 border-b border-[var(--divider)]">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-full bg-[var(--accent)] text-white flex items-center justify-center text-xs font-bold">
+              AI
+            </div>
+            <div>
+              <div className="font-medium text-[var(--foreground)]">AI Cookbook</div>
+              <div className="text-[var(--muted-light)] text-[12px]">{dateStr}</div>
+            </div>
+          </div>
+          <span className="text-[var(--muted-light)]">·</span>
+          <span className="text-[var(--muted-light)]">{readMin} min read</span>
         </div>
 
         {/* Content */}
-        <div className="prose prose-[var(--foreground)] prose-lg max-w-none dark:prose-invert">
-          {post.content.split("\n").map((paragraph, i) => {
-            const trimmed = paragraph.trim();
-            if (!trimmed) return <br key={i} />;
-            if (trimmed.startsWith("## ")) return <h2 key={i} className="text-2xl font-bold mt-10 mb-4">{trimmed.slice(3)}</h2>;
-            if (trimmed.startsWith("### ")) return <h3 key={i} className="text-xl font-semibold mt-8 mb-3">{trimmed.slice(4)}</h3>;
-            if (trimmed.startsWith("- ")) {
-              return (
-                <ul key={i} className="space-y-2 mb-4 ml-4">
-                  {trimmed.split("\n").map((item, j) => (
-                    <li key={j} className="text-[15px] leading-relaxed">{item.replace(/^- /, "")}</li>
-                  ))}
-                </ul>
-              );
-            }
-            if (trimmed.startsWith("**") && trimmed.includes(":**")) {
-              return <strong key={i} className="block text-lg mt-6 mb-2">{trimmed.replace(/\*\*:/g, ":").replace(/\*\*/g, "")}</strong>;
-            }
-            if (trimmed.startsWith("> ")) {
-              return (
-                <blockquote key={i} className="border-l-4 border-[var(--accent)] pl-4 italic text-[var(--muted)] my-4">
-                  {trimmed.slice(2)}
-                </blockquote>
-              );
-            }
-            if (trimmed.match(/^https?:\/\//)) {
-              return (
-                <a key={i} href={trimmed} target="_blank" rel="noopener noreferrer" className="block text-[var(--accent)] hover:underline my-2 text-sm">
-                  {trimmed}
-                </a>
-              );
-            }
-            if (trimmed.startsWith("```")) {
-              return null; // skip code fence lines for simplicity
-            }
-            return <p key={i} className="text-[15px] leading-relaxed mb-4">{trimmed}</p>;
-          })}
+        <div className="leading-relaxed">
+          {renderContent(post.content)}
         </div>
 
         {/* Sources */}
         {post.sources.length > 0 && (
-          <div className="mt-12 pt-8 border-t border-[var(--divider)]">
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-[var(--muted-light)] mb-4">📚 Sources</h4>
+          <div className="mt-14 pt-8 border-t border-[var(--divider)]">
+            <h4 className="text-sm font-semibold uppercase tracking-wider text-[var(--muted-light)] mb-4">📚 Sources & References</h4>
             <div className="space-y-2">
               {post.sources.map((source, i) => (
                 <a
@@ -183,9 +384,9 @@ export default function BlogPostPage() {
                   href={source.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-2.5 text-[13px] rounded-lg px-3 py-2 -mx-1 transition-colors hover:bg-[var(--section-bg)] group"
+                  className="flex items-center gap-2.5 text-[13px] rounded-lg px-3 py-2 -mx-1 transition-colors hover:bg-[var(--section-bg)] group"
                 >
-                  <svg className="w-4 h-4 shrink-0 mt-0.5 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <svg className="w-4 h-4 shrink-0 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                   </svg>
                   <span className="text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors">{source.name}</span>
@@ -199,7 +400,7 @@ export default function BlogPostPage() {
         <div className="mt-12 pt-8 border-t border-[var(--divider)] flex items-center justify-between">
           <button
             onClick={() => router.push("/blog")}
-            className="text-[var(--accent)] hover:underline text-sm"
+            className="text-[var(--accent)] hover:underline text-sm font-medium"
           >
             ← All Posts
           </button>
