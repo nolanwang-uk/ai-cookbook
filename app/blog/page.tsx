@@ -4,15 +4,24 @@ import { useState, useEffect, useCallback } from "react";
 import { siteTitle } from "../data/content";
 import { Lang } from "../data/content";
 
+interface BlogVideo {
+  platform: string;
+  id: string;
+  title: string;
+  source: string;
+}
+
 interface BlogPost {
   id: string;
   slug: string;
   title: string;
   excerpt: string;
+  summary?: string;
   content: string;
   coverImage?: string;
   category: string;
   publishedAt: string;
+  videos?: BlogVideo[];
   sources: { name: string; url: string }[];
   tags: string[];
 }
@@ -36,6 +45,133 @@ const categoryColor: Record<string, string> = {
   "AI Innovations": "bg-indigo-50 text-indigo-700 ring-indigo-600/10 dark:bg-indigo-500/10 dark:text-indigo-400",
   "Industry News": "bg-cyan-50 text-cyan-700 ring-cyan-600/10 dark:bg-cyan-500/10 dark:text-cyan-400",
 };
+
+/* ─── Inline Video Player ─── */
+function VideoPlayer({ video }: { video: BlogVideo }) {
+  const [loaded, setLoaded] = useState(false);
+
+  const isYouTube = video.platform !== "bilibili";
+
+  if (video.platform === "bilibili" && video.id.startsWith("BV")) {
+    return (
+      <div className="rounded-lg overflow-hidden bg-black border border-[var(--card-border)]">
+        <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+          {!loaded && (
+            <div className="absolute inset-0 flex items-center justify-center bg-[var(--section-bg)] z-10">
+              <svg className="animate-spin h-8 w-8 text-[var(--muted)]" viewBox="0 0 24 24" fill="none">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+              </svg>
+            </div>
+          )}
+          <iframe
+            src={`//player.bilibili.com/player.html?bvid=${video.id}&page=1&autoplay=0&high_quality=1`}
+            scrolling="no"
+            frameBorder="no"
+            allowFullScreen
+            className="absolute inset-0 w-full h-full"
+            onLoad={() => setLoaded(true)}
+          />
+        </div>
+        <div className="px-3 py-2 bg-[var(--card)] border-t border-[var(--card-border)]">
+          <p className="text-[12px] text-[var(--muted)] truncate">{video.title}</p>
+          <p className="text-[11px] text-[var(--muted-light)]">{video.source}</p>
+        </div>
+      </div>
+    );
+  }
+
+  // YouTube
+  return (
+    <div className="rounded-lg overflow-hidden bg-black border border-[var(--card-border)]">
+      <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+        {!loaded && (
+          <div className="absolute inset-0 flex items-center justify-center bg-[var(--section-bg)] z-10">
+            <svg className="animate-spin h-8 w-8 text-[var(--muted)]" viewBox="0 0 24 24" fill="none">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+            </svg>
+          </div>
+        )}
+        <iframe
+          src={`https://www.youtube.com/embed/${video.id}?rel=0&modestbranding=1`}
+          title={video.title}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          className="absolute inset-0 w-full h-full"
+          onLoad={() => setLoaded(true)}
+        />
+      </div>
+      <div className="px-3 py-2 bg-[var(--card)] border-t border-[var(--card-border)]">
+        <p className="text-[12px] text-[var(--muted)] truncate">{video.title}</p>
+        <p className="text-[11px] text-[var(--muted-light)]">{video.source}</p>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Expandable Video Widget ─── */
+function VideoWidget({ videos }: { videos: BlogVideo[] }) {
+  const [expanded, setExpanded] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  if (!videos.length) return null;
+
+  return (
+    <div className={`mt-3 border-t border-[var(--divider)] transition-all duration-300 ${expanded ? "pb-4" : ""}`}>
+      {/* Video list header */}
+      <button
+        onClick={() => setExpanded(!expanded)}
+        className="w-full flex items-center justify-between px-4 py-2.5 text-left hover:bg-[var(--section-bg)] transition-colors rounded-lg"
+      >
+        <div className="flex items-center gap-2">
+          <span className="text-red-600 dark:text-red-400 text-sm">▶</span>
+          <span className="text-[13px] font-medium text-[var(--foreground)]">
+            Watch videos ({videos.length})
+          </span>
+        </div>
+        <svg
+          className={`w-4 h-4 text-[var(--muted)] transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      {/* Expanded video area */}
+      {expanded && (
+        <div className="px-4 pt-3">
+          {videos.length > 1 && (
+            <div className="flex gap-1.5 mb-3 overflow-x-auto pb-1">
+              {videos.map((v, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveIndex(i)}
+                  className={`shrink-0 px-3 py-1 rounded-full text-[11px] font-medium transition-all duration-150 ${
+                    i === activeIndex
+                      ? "bg-[var(--accent)] text-white"
+                      : "bg-[var(--section-bg)] text-[var(--muted)] hover:bg-[var(--section-bg)]/80"
+                  }`}
+                >
+                  {v.platform === "bilibili" ? "🅱" : "▶"} {v.title.slice(0, 25)}{v.title.length > 25 ? "…" : ""}
+                </button>
+              ))}
+            </div>
+          )}
+          <VideoPlayer video={videos[activeIndex]} />
+          {videos.length > 1 && (
+            <p className="text-[11px] text-[var(--muted-light)] mt-2">
+              {activeIndex + 1} of {videos.length} videos
+            </p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function BlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -68,6 +204,7 @@ export default function BlogPage() {
 
   const categories = ["All", ...Object.keys(categoryEmoji)];
   const filteredPosts = filter === "All" ? posts : posts.filter((p) => p.category === filter);
+  const videoCount = posts.reduce((acc, p) => acc + (p.videos?.length || 0), 0);
 
   return (
     <div className="min-h-screen">
@@ -101,6 +238,11 @@ export default function BlogPage() {
             <p className="text-base text-[var(--muted)] leading-relaxed max-w-xl">
               Curated AI news, tools, use cases, research breakthroughs, and video explanations — published every workday morning.
             </p>
+            <div className="flex items-center gap-4 mt-4">
+              <span className="text-xs text-[var(--muted-light)]">
+                {posts.length} posts · {videoCount} embedded videos
+              </span>
+            </div>
           </div>
         </div>
         <div className="border border-[var(--divider)]" />
@@ -123,6 +265,7 @@ export default function BlogPage() {
           <div className="flex flex-wrap gap-2 mb-8">
             {categories.map((cat) => {
               const isActive = filter === cat;
+              const count = cat === "All" ? posts.length : posts.filter((p) => p.category === cat).length;
               return (
                 <button
                   key={cat}
@@ -133,7 +276,7 @@ export default function BlogPage() {
                       : "bg-[var(--card)] text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--section-bg)] border border-[var(--card-border)]"
                   }`}
                 >
-                  {categoryEmoji[cat]} {cat}
+                  {categoryEmoji[cat]} {cat} <span className="opacity-60">({count})</span>
                 </button>
               );
             })}
@@ -142,14 +285,13 @@ export default function BlogPage() {
           {/* Posts Grid */}
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filteredPosts.map((post) => (
-              <a
+              <div
                 key={post.id}
-                href={`/blog/${post.slug}`}
-                className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] overflow-hidden transition-all duration-200 hover:border-[var(--accent-subtle)] hover:shadow-lg hover:shadow-[var(--accent)]/5 hover:-translate-y-0.5 block"
+                className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] overflow-hidden transition-all duration-200 hover:border-[var(--accent-subtle)] hover:shadow-lg hover:shadow-[var(--accent)]/5"
               >
                 {/* Cover Image */}
                 {post.coverImage && (
-                  <div className="relative aspect-[16/9] overflow-hidden bg-[var(--section-bg)]">
+                  <a href={`/blog/${post.slug}`} className="block relative aspect-[16/9] overflow-hidden bg-[var(--section-bg)]">
                     <img
                       src={post.coverImage}
                       alt={post.title}
@@ -157,16 +299,16 @@ export default function BlogPage() {
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-                    <div className="absolute bottom-3 left-3 flex items-center gap-1.5">
+                    <div className="absolute bottom-3 left-3">
                       <span className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[10px] font-semibold ring-1 ring-inset ${categoryColor[post.category] || "bg-gray-50 text-gray-700 ring-gray-600/10"}`}>
                         {categoryEmoji[post.category]} {post.category}
                       </span>
                     </div>
-                  </div>
+                  </a>
                 )}
 
                 <div className="p-5">
-                  {/* Category badge (only if no image) */}
+                  {/* No image: show category inline */}
                   {!post.coverImage && (
                     <div className="flex items-center justify-between mb-3">
                       <span className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] font-medium ring-1 ring-inset ${categoryColor[post.category] || "bg-gray-50 text-gray-700 ring-gray-600/10"}`}>
@@ -178,41 +320,55 @@ export default function BlogPage() {
                     </div>
                   )}
 
+                  {/* Date for cards with images */}
                   {post.coverImage && (
                     <div className="flex items-center justify-between mt-3 mb-2">
-                      <div className="flex items-center gap-2">
-                        <span className="text-[10px] text-[var(--muted)]">
-                          {new Date(post.publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                      <span className="text-[10px] text-[var(--muted)]">
+                        {new Date(post.publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                      </span>
+                      {post.videos && post.videos.length > 0 && (
+                        <span className="inline-flex items-center gap-1 text-[10px] font-medium text-[var(--muted)]">
+                          ▶ {post.videos.length}v
                         </span>
-                        {post.videos && post.videos.length > 0 && (
-                          <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-500/10 px-2 py-0.5 rounded-full">
-                            ▶ {post.videos.length} {post.videos.length === 1 ? "video" : "videos"}
-                          </span>
-                        )}
-                      </div>
+                      )}
                     </div>
                   )}
 
-                  <h3 className="text-[17px] font-semibold leading-snug mb-2 group-hover:text-[var(--accent)] transition-colors line-clamp-2">
-                    {post.title}
-                  </h3>
+                  {/* Title & Link */}
+                  <a href={`/blog/${post.slug}`} className="block">
+                    <h3 className="text-[17px] font-semibold leading-snug mb-2 group-hover:text-[var(--accent)] transition-colors line-clamp-2">
+                      {post.title}
+                    </h3>
+                  </a>
+
+                  {/* Excerpt */}
                   <p className="text-[13px] text-[var(--muted)] leading-relaxed line-clamp-3 mb-4">
                     {post.excerpt}
                   </p>
+
+                  {/* Sources */}
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    {post.sources.slice(0, 2).map((s, i) => (
+                      <span key={i} className="text-[10px] text-[var(--muted-light)] bg-[var(--section-bg)] px-2 py-0.5 rounded">
+                        {s.name}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Inline Video Widget */}
+                  <VideoWidget videos={post.videos || []} />
+                </div>
+
+                {/* Footer arrow */}
+                <a href={`/blog/${post.slug}`} className="block px-5 pb-4">
                   <div className="flex items-center justify-between">
-                    <div className="flex flex-wrap gap-2">
-                      {post.sources.slice(0, 2).map((s, i) => (
-                        <span key={i} className="text-[10px] text-[var(--muted-light)] bg-[var(--section-bg)] px-2 py-0.5 rounded">
-                          {s.name}
-                        </span>
-                      ))}
-                    </div>
+                    <span className="text-[12px] text-[var(--accent)] font-medium">Read more →</span>
                     <svg className="w-4 h-4 text-[var(--accent)] opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
                   </div>
-                </div>
-              </a>
+                </a>
+              </div>
             ))}
           </div>
 
