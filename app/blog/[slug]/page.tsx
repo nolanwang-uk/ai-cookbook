@@ -1,7 +1,14 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
+
+interface BlogVideo {
+  platform: string;
+  id: string;
+  title: string;
+  source: string;
+}
 
 interface BlogPost {
   id: string;
@@ -13,6 +20,7 @@ interface BlogPost {
   coverImage?: string;
   category: string;
   publishedAt: string;
+  videos?: BlogVideo[];
   sources: { name: string; url: string }[];
   tags: string[];
 }
@@ -97,11 +105,10 @@ function renderContent(content: string) {
 
     if (trimmed.startsWith("```")) {
       if (inCodeBlock) {
-        const lang = codeLines[0];
-        const code = lang && codeLines.length > 1 ? codeLines.slice(1).join("\n") : codeLines.join("\n");
+        const code = codeLines.join("\n");
         elements.push(
           <pre key={`code-${key++}`} className="bg-[var(--section-bg)] rounded-lg p-4 mb-5 overflow-x-auto text-sm font-mono text-[var(--foreground)] leading-relaxed">
-            {code || codeLines.join("\n")}
+            {code}
           </pre>
         );
         codeLines = [];
@@ -118,7 +125,6 @@ function renderContent(content: string) {
       continue;
     }
 
-    // H2
     if (trimmed.startsWith("## ") && !trimmed.startsWith("### ")) {
       flushList();
       flushPara();
@@ -128,7 +134,6 @@ function renderContent(content: string) {
       continue;
     }
 
-    // H3
     if (trimmed.startsWith("### ")) {
       flushList();
       flushPara();
@@ -138,7 +143,6 @@ function renderContent(content: string) {
       continue;
     }
 
-    // Blockquotes
     if (trimmed.startsWith("> ")) {
       flushList();
       flushPara();
@@ -150,7 +154,6 @@ function renderContent(content: string) {
       continue;
     }
 
-    // Bold headings
     if (trimmed.startsWith("**") && trimmed.includes("**") && (trimmed.endsWith("**") || trimmed.includes(":"))) {
       flushList();
       flushPara();
@@ -167,21 +170,18 @@ function renderContent(content: string) {
       continue;
     }
 
-    // Lists
     if (trimmed.startsWith("- ")) {
       flushPara();
       listItems.push(trimmed);
       continue;
     }
 
-    // Empty lines
     if (!trimmed) {
       flushList();
       flushPara();
       continue;
     }
 
-    // Regular text
     flushList();
     paraLines.push(trimmed);
   }
@@ -189,6 +189,91 @@ function renderContent(content: string) {
   flushList();
   flushPara();
   return elements;
+}
+
+/* ─── Video Embed Component ─── */
+function VideoEmbed({ video }: { video: BlogVideo }) {
+  const [loaded, setLoaded] = useState(false);
+
+  if (video.platform === "bilibili") {
+    return (
+      <div className="my-8 rounded-xl overflow-hidden border border-[var(--card-border)] bg-[var(--card)]">
+        <div className="relative w-full" style={{ paddingBottom: "62.5%" }}>
+          {!loaded && (
+            <div className="absolute inset-0 flex items-center justify-center bg-[var(--section-bg)]">
+              <svg className="animate-spin h-8 w-8 text-[var(--muted)]" viewBox="0 0 24 24" fill="none">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+              </svg>
+            </div>
+          )}
+          <iframe
+            src={`//player.bilibili.com/player.html?bvid=${video.id}&page=1&autoplay=0&high_quality=1`}
+            scrolling="no"
+            frameBorder="no"
+            allowFullScreen
+            className="absolute inset-0 w-full h-full"
+            onLoad={() => setLoaded(true)}
+          />
+        </div>
+        <div className="px-4 py-3 border-t border-[var(--card-border)]">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-semibold text-[var(--accent)]">📺 {video.source}</span>
+          </div>
+          <p className="text-sm text-[var(--muted)] mt-1">{video.title}</p>
+        </div>
+      </div>
+    );
+  }
+
+  // YouTube
+  return (
+    <div className="my-8 rounded-xl overflow-hidden border border-[var(--card-border)] bg-[var(--card)]">
+      <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+        {!loaded && (
+          <div className="absolute inset-0 flex items-center justify-center bg-[var(--section-bg)]">
+            <svg className="animate-spin h-8 w-8 text-[var(--muted)]" viewBox="0 0 24 24" fill="none">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+            </svg>
+          </div>
+        )}
+        <iframe
+          src={`https://www.youtube.com/embed/${video.id}?rel=0&modestbranding=1`}
+          title={video.title}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          className="absolute inset-0 w-full h-full"
+          onLoad={() => setLoaded(true)}
+        />
+      </div>
+      <div className="px-4 py-3 border-t border-[var(--card-border)]">
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-semibold text-red-600 dark:text-red-400">▶ YouTube</span>
+          <span className="text-xs text-[var(--muted)]">{video.source}</span>
+        </div>
+        <p className="text-sm text-[var(--muted)] mt-1">{video.title}</p>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Video Section ─── */
+function VideosSection({ videos }: { videos: BlogVideo[] }) {
+  if (!videos || videos.length === 0) return null;
+
+  return (
+    <div className="mt-8 mb-8">
+      <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+        <span className="text-xl">🎬</span> Watch & Learn
+      </h3>
+      <div className="space-y-6">
+        {videos.map((v, i) => (
+          <VideoEmbed key={`${v.platform}-${v.id}-${i}`} video={v} />
+        ))}
+      </div>
+    </div>
+  );
 }
 
 const categoryEmoji: Record<string, string> = {
@@ -273,12 +358,12 @@ export default function BlogPostPage() {
       <article className="mx-auto max-w-3xl px-6 py-8 lg:py-12">
         {/* Cover Image */}
         {post.coverImage && (
-          <div className="rounded-2xl overflow-hidden mb-8 border border-[var(--card-border)] shadow-lg shadow-black/[0.04]">
+          <div className="rounded-2xl overflow-hidden mb-6 border border-[var(--card-border)] shadow-lg shadow-black/[0.04]">
             <img src={post.coverImage} alt={post.title} className="w-full aspect-[16/9] object-cover" />
           </div>
         )}
 
-        {/* Summary card under cover image */}
+        {/* Summary card */}
         {(post.summary || post.excerpt) && (
           <div className="rounded-xl border border-[var(--accent-subtle)] bg-[var(--accent)]/5 p-5 mb-8">
             <p className="text-[15px] text-[var(--foreground)] leading-relaxed font-medium">
@@ -287,11 +372,16 @@ export default function BlogPostPage() {
           </div>
         )}
 
-        {/* Meta badges */}
+        {/* Meta badges and video badge */}
         <div className="flex flex-wrap items-center gap-2 mb-4">
           <span className={`inline-flex items-center gap-1 rounded-md px-3 py-1 text-[12px] font-semibold ring-1 ring-inset ${categoryColor[post.category] || "bg-gray-50"}`}>
             {categoryEmoji[post.category]} {post.category}
           </span>
+          {post.videos && post.videos.length > 0 && (
+            <span className="inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-[12px] font-semibold bg-red-50 text-red-700 ring-1 ring-inset ring-red-600/10 dark:bg-red-500/10 dark:text-red-400 dark:ring-red-400/20">
+              🎬 {post.videos.length} {post.videos.length === 1 ? "video" : "videos"}
+            </span>
+          )}
           {post.tags.map((tag) => (
             <span key={tag} className="text-[11px] text-[var(--muted)] bg-[var(--section-bg)] px-2 py-0.5 rounded-full">
               #{tag}
@@ -318,6 +408,9 @@ export default function BlogPostPage() {
           <span className="text-[var(--muted-light)]">·</span>
           <span className="text-[var(--muted-light)]">{readMin} min read</span>
         </div>
+
+        {/* Video Embeds - shown right after author line */}
+        <VideosSection videos={post.videos || []} />
 
         {/* Content */}
         <div className="leading-relaxed">

@@ -180,9 +180,16 @@ export default function BlogPage() {
 
                   {post.coverImage && (
                     <div className="flex items-center justify-between mt-3 mb-2">
-                      <span className="text-[10px] text-[var(--muted)]">
-                        {new Date(post.publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] text-[var(--muted)]">
+                          {new Date(post.publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                        </span>
+                        {post.videos && post.videos.length > 0 && (
+                          <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-500/10 px-2 py-0.5 rounded-full">
+                            ▶ {post.videos.length} {post.videos.length === 1 ? "video" : "videos"}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   )}
 

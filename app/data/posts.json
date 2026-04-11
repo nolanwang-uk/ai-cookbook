@@ -57,7 +57,21 @@
       "LLM"
     ],
     "coverImage": "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=1200&h=630&fit=crop&q=80",
-    "summary": "Two years after its release, Karpathy's series of building neural networks from scratch in PyTorch remains the single highest-leverage learning resource for anyone who wants to truly understand LLMs -- not just use them."
+    "summary": "Two years after its release, Karpathy's series of building neural networks from scratch in PyTorch remains the single highest-leverage learning resource for anyone who wants to truly understand LLMs -- not just use them.",
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "VMj-3S1tku0",
+        "title": "Karpathy: Neural Networks Zero to Hero (Lecture 1)",
+        "source": "Andrej Karpathy"
+      },
+      {
+        "platform": "youtube",
+        "id": "kCc8FmEb1nY",
+        "title": "Karpathy: Let's build GPT from scratch",
+        "source": "Andrej Karpathy"
+      }
+    ]
   },
   {
     "id": "012",
@@ -111,7 +125,15 @@
       "ROI"
     ],
     "coverImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=630&fit=crop&q=80",
-    "summary": "Five real-world AI agent systems that deliver measurable ROI: from customer support triage to automated code review. Actual numbers on time saved and bugs caught, plus the hardest lessons learned in production."
+    "summary": "Five real-world AI agent systems that deliver measurable ROI: from customer support triage to automated code review. Actual numbers on time saved and bugs caught, plus the hardest lessons learned in production.",
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "dPmB8h68g6s",
+        "title": "AI Agents Explained",
+        "source": "Theo"
+      }
+    ]
   },
   {
     "id": "014",
@@ -175,7 +197,27 @@
       "Karpathy"
     ],
     "summary": "Weekly curated picks: Karpathy on the real state of LLM agents, Bilibili creators breaking down the latest fine-tuning methods, and honest reviews of AI coding tools from top tech YouTubers.",
-    "coverImage": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1200&h=630&fit=crop&q=80"
+    "coverImage": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1200&h=630&fit=crop&q=80",
+    "videos": [
+      {
+        "platform": "bilibili",
+        "id": "BV1TAtwzTE1S",
+        "title": "李宏毅: 生成式AI时代下的机器学习",
+        "source": "Bilibili - 李宏毅"
+      },
+      {
+        "platform": "bilibili",
+        "id": "BV1f5411P769",
+        "title": "李沐: 动手学深度学习",
+        "source": "Bilibili - 跟李沐学AI"
+      },
+      {
+        "platform": "youtube",
+        "id": "eVq8jEwFj4Y",
+        "title": "Vibe Coding in 100 Seconds",
+        "source": "Fireship"
+      }
+    ]
   },
   {
     "id": "016",
@@ -261,7 +303,21 @@
       "LLM"
     ],
     "coverImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=630&fit=crop&q=80",
-    "summary": "Anthropic released Claude 3.7 Sonnet, introducing extended thinking that allows the model to reason through complex problems before responding. It achieves #1 on SWE-bench Verified and top scores on math benchmarks."
+    "summary": "Anthropic released Claude 3.7 Sonnet, introducing extended thinking that allows the model to reason through complex problems before responding. It achieves #1 on SWE-bench Verified and top scores on math benchmarks.",
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "uOz9m2nVhB8",
+        "title": "Claude 3.7 Sonnet Deep Dive",
+        "source": "AI Explained"
+      },
+      {
+        "platform": "youtube",
+        "id": "VMj-3S1tku0",
+        "title": "Karpathy: Neural Networks Zero to Hero (Lecture 1)",
+        "source": "Andrej Karpathy"
+      }
+    ]
   },
   {
     "id": "002",
@@ -292,7 +348,21 @@
       "Developer Tools"
     ],
     "coverImage": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=630&fit=crop&q=80",
-    "summary": "The two leading AI-powered IDEs go head-to-head. Cursor dominates in codebase-wide search and agent-mode reliability, while Windsurf excels in conversational UX and multi-step reasoning."
+    "summary": "The two leading AI-powered IDEs go head-to-head. Cursor dominates in codebase-wide search and agent-mode reliability, while Windsurf excels in conversational UX and multi-step reasoning.",
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "U6BzW0-7DjA",
+        "title": "AI Coding Tools: Complete Comparison 2025",
+        "source": "Matt Wolfe"
+      },
+      {
+        "platform": "youtube",
+        "id": "sI1rBiJ9tLc",
+        "title": "How AI Code Assistants Actually Work",
+        "source": "Theo"
+      }
+    ]
   },
   {
     "id": "003",
@@ -319,7 +389,27 @@
       "YouTube"
     ],
     "coverImage": "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=1200&h=630&fit=crop&q=80",
-    "summary": "Two years after its release, Karpathy's series of building neural networks from scratch in PyTorch remains the single highest-leverage learning resource for anyone who wants to truly understand LLMs -- not just use them."
+    "summary": "Two years after its release, Karpathy's series of building neural networks from scratch in PyTorch remains the single highest-leverage learning resource for anyone who wants to truly understand LLMs -- not just use them.",
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "VMj-3S1tku0",
+        "title": "Karpathy: Neural Networks Zero to Hero (Lecture 1)",
+        "source": "Andrej Karpathy"
+      },
+      {
+        "platform": "youtube",
+        "id": "kCc8FmEb1nY",
+        "title": "Karpathy: Let's build GPT from scratch",
+        "source": "Andrej Karpathy"
+      },
+      {
+        "platform": "bilibili",
+        "id": "BV1Jz6SYbEiW",
+        "title": "Karpathy 神经网络入门（中文字幕）",
+        "source": "Bilibili"
+      }
+    ]
   },
   {
     "id": "004",
@@ -404,7 +494,21 @@
       "No-Code"
     ],
     "coverImage": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=630&fit=crop&q=80",
-    "summary": "We tested the full vibe coding pipeline: from Bolt.new generation to export, IDE polish, and deployment. What works surprisingly well, where it breaks, and the workflow that actually ships to production."
+    "summary": "We tested the full vibe coding pipeline: from Bolt.new generation to export, IDE polish, and deployment. What works surprisingly well, where it breaks, and the workflow that actually ships to production.",
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "eVq8jEwFj4Y",
+        "title": "Vibe Coding in 100 Seconds",
+        "source": "Fireship"
+      },
+      {
+        "platform": "youtube",
+        "id": "ZqTn1zSBDsA",
+        "title": "The Future of AI Coding",
+        "source": "Fireship"
+      }
+    ]
   },
   {
     "id": "007",
@@ -488,6 +592,20 @@
       "Software Development"
     ],
     "coverImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=630&fit=crop&q=80",
-    "summary": "After a year of massive hype, what do AI agents actually deliver? 30% bug catch rate in code review, 2-3 hours per week saved on docs, but fully autonomous development remains out of reach."
+    "summary": "After a year of massive hype, what do AI agents actually deliver? 30% bug catch rate in code review, 2-3 hours per week saved on docs, but fully autonomous development remains out of reach.",
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "dPmB8h68g6s",
+        "title": "AI Agents Explained",
+        "source": "Theo"
+      },
+      {
+        "platform": "youtube",
+        "id": "sI1rBiJ9tLc",
+        "title": "How AI Code Assistants Actually Work",
+        "source": "Theo"
+      }
+    ]
   }
 ]
