@@ -1,6 +1,235 @@
 [
   {
     "id": "010",
+    "slug": "ai-coding-tools-march-2026-2026-04-17",
+    "title": "The AI Coding Tool Landscape in March 2026",
+    "excerpt": "From Cursor Agent Mode to Windsurf Cascade 2.0 and Claude Code CLI -- the AI IDE space has evolved dramatically. Here is what actually moved the needle.",
+    "content": "## The AI Coding Tool Landscape in March 2026\n\nThe AI coding assistant space has reached an interesting inflection point. After a year of rapid innovation, tools are converging on similar capabilities while differentiating on UX.\n\n### Cursor Agent Mode Goes Production-Ready\n\nCursor's Agent Mode graduated from preview to stable:\n- **Plan review before execution** -- see proposed changes before applying\n- **Multi-file refactoring** -- agents understand cross-file dependencies\n- **Terminal integration** -- can run tests and iterate on failures automatically\n\n### Windsurf Cascade 2.0\n\nCodeium's Windsurf introduced Cascade 2.0:\n- **Multi-step reasoning chains** -- break complex tasks into 10+ sub-steps\n- **Session memory** -- remembers what you were working on across days\n- **Codebase-wide awareness** -- now indexes your full project like Cursor\n\n### Claude Code CLI Goes Mainstream\n\nAnthropic's Claude Code CLI is the go-to for terminal-first developers:\n- **Natural language to git operations** -- just type what you want\n- **Deep codebase understanding** -- extended thinking handles large repos\n- **Subagent spawning** -- delegate independent tasks to parallel workers\n\n### The Verdict\n\n- **Cursor wins** on full-stack web development workflows\n- **Windsurf wins** on conversational debugging and learning\n- **Claude Code wins** on terminal-native workflows and DevOps\n\n### What's Next\n\n- AI that writes specs before code\n- Multi-agent code review (security, performance, accessibility)\n- Voice-driven development\n\n---\n*Published: 2026-04-17*",
+    "category": "New AI Tools",
+    "publishedAt": "2026-04-17T08:00:00+08:00",
+    "sources": [
+      {
+        "name": "Cursor.sh",
+        "url": "https://cursor.sh/"
+      },
+      {
+        "name": "Windsurf",
+        "url": "https://codeium.com/windsurf"
+      },
+      {
+        "name": "Claude Code",
+        "url": "https://www.anthropic.com/claude-code"
+      }
+    ],
+    "tags": [
+      "Cursor",
+      "Windsurf",
+      "Claude Code",
+      "IDE",
+      "Vibe Coding"
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=630&fit=crop&q=80"
+  },
+  {
+    "id": "011",
+    "slug": "karpathy-nn-zero-to-hero-2026-04-17",
+    "title": "Why Karpathy's Neural Networks Zero to Hero Still Reigns Supreme",
+    "excerpt": "Andrej Karpathy's PyTorch-from-scratch series remains the best way to truly understand how LLMs work under the hood.",
+    "content": "## Why Karpathy's 'Neural Networks: Zero to Hero' Still Reigns Supreme\n\nIn the age of one-click fine-tuning, it is tempting to skip the fundamentals. Here is why you should not.\n\n### The Series\n\nKarpathy builds a GPT-like model from scratch in PyTorch, from character-level tokenization to a full transformer.\n\n### Why It Still Matters\n\n#### 1. Intuition Over Incantation\n\nMost LLM tutorials treat transformers as magic. Karpathy shows you every line of code.\n\n#### 2. The Aha Moments\n\n- Lecture 2: Building a bigram model from scratch\n- Lecture 5: Building GPT from scratch (the legendary one)\n- Lecture 7: The Transformer, component by component\n\n#### 3. You Cannot Debug What You Do Not Understand\n\nWhen your RAG pipeline hallucinates, developers who thrive understand what is happening under the hood.\n\n### Watch It\n\n- https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ\n- https://www.bilibili.com/video/BV1Jz6SYbEiW/ (Chinese subtitles)\n\n### Pro Tip\n\nWatch the micrograd playlist first, then do the nn playlist. The payoff is enormous.\n\n---\n*Published: 2026-04-17*",
+    "category": "Video Explainers",
+    "publishedAt": "2026-04-17T08:00:00+08:00",
+    "sources": [
+      {
+        "name": "Andrej Karpathy (YouTube)",
+        "url": "https://www.youtube.com/@AndrejKarpathy"
+      },
+      {
+        "name": "micrograd",
+        "url": "https://github.com/karpathy/micrograd"
+      }
+    ],
+    "tags": [
+      "Karpathy",
+      "Education",
+      "YouTube",
+      "PyTorch",
+      "LLM"
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=1200&h=630&fit=crop&q=80"
+  },
+  {
+    "id": "012",
+    "slug": "fastai-practical-deep-learning-update-2026-04-16",
+    "title": "Fast.ai's Practical Deep Learning Gets a Major 2026 Update",
+    "excerpt": "Jeremy Howard's legendary free course has been refreshed with LLM application engineering, RAG patterns, and agent design.",
+    "content": "## Fast.ai Gets a Major 2026 Update\n\nJeremy Howard updated 'Practical Deep Learning for Coders' for 2026.\n\n### What's New\n\n#### LLM Application Engineering\n\n- Prompt engineering patterns that work in production\n- RAG design: chunking, retrieval, re-ranking\n- Function calling and tool augmentation\n- Evaluation: how to know if your LLM app is any good\n\n#### Agent Design\n\nNew practical examples building agentic systems with lightweight frameworks.\n\n### Why Fast.ai Is Different\n\nJeremy Howard's approach is **top-down** -- build something real first, understand the math later.\n\n### Get Started\n\n- https://course.fast.ai/\n- https://forums.fast.ai/\n\n---\n*Published: 2026-04-16*",
+    "category": "AI Innovations",
+    "publishedAt": "2026-04-16T08:00:00+08:00",
+    "sources": [
+      {
+        "name": "Fast.ai",
+        "url": "https://course.fast.ai/"
+      },
+      {
+        "name": "Fast.ai Forums",
+        "url": "https://forums.fast.ai/"
+      }
+    ],
+    "tags": [
+      "Fast.ai",
+      "Deep Learning",
+      "LLM",
+      "Course"
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=1200&h=630&fit=crop&q=80"
+  },
+  {
+    "id": "013",
+    "slug": "ai-agent-production-systems-2026-04-16",
+    "title": "AI Agents in Production: 5 Real Systems That Actually Ship Value",
+    "excerpt": "Five production AI agent systems delivering measurable ROI today -- with architectures, tools, and lessons learned.",
+    "content": "## AI Agents in Production: 5 Real Systems\n\n### 1. Automated Customer Support Triage\n\n- **What**: Reads tickets, classifies, routes, drafts responses\n- **Tools**: Claude 3.7 + RAG on knowledge base\n- **ROI**: 60% reduction in first-response time\n\n### 2. Code Review Assistant\n\n- **What**: Reviews every PR for security, performance, style\n- **Tools**: AST parser + LLM analysis\n- **ROI**: Catches ~25% of bugs before human review\n\n### 3. Research Synthesis Agent\n\n- **What**: Searches web, reads papers, synthesizes report with citations\n- **Tools**: Browser automation + LLM + RAG\n- **ROI**: Research time from days to hours\n\n### 4. Data Pipeline Monitor\n\n- **What**: Monitors data quality, detects anomalies, explains and suggests fixes\n- **Tools**: Airflow + dbt + LLM explanation layer\n- **ROI**: 80% reduction in data incident MTTR\n\n### 5. Documentation Maintainer\n\n- **What**: Reads PR diffs, updates affected docs automatically\n- **Tools**: GitHub Actions + LLM with codebase context\n- **ROI**: Docs stay current without manual effort\n\n### Key Lessons\n\n1. **Agents are great at reading, mediocre at writing**\n2. **Give them tool access** -- function calling is the killer feature\n3. **Human-in-the-loop always pays off**\n4. **Evaluation is the hardest part**\n\n---\n*Published: 2026-04-16*",
+    "category": "Use Cases",
+    "publishedAt": "2026-04-16T08:00:00+08:00",
+    "sources": [
+      {
+        "name": "Hacker News",
+        "url": "https://news.ycombinator.com/"
+      },
+      {
+        "name": "Anthropic case studies",
+        "url": "https://www.anthropic.com/customers"
+      }
+    ],
+    "tags": [
+      "AI Agents",
+      "Production",
+      "Case Studies",
+      "ROI"
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=630&fit=crop&q=80"
+  },
+  {
+    "id": "014",
+    "slug": "smart-model-routing-guide-2026-04-16",
+    "title": "Smart Model Routing: Save 80% on AI Costs with Intelligent Dispatching",
+    "excerpt": "Stop paying for Claude Opus when Gemma 4 handles it. Here is a practical guide to 3-tier model routing.",
+    "content": "## Smart Model Routing: The 3-Tier Approach\n\n### The Problem\n\nMost AI apps route every request to the most expensive model, wasting money on simple tasks.\n\n### The Solution\n\n- **Tier 1** -- Local model (Gemma4 on Ollama) = $0\n- **Tier 2** -- Claude Sonnet / GPT-4o-mini = $0.03/request\n- **Tier 3** -- Claude Opus / GPT-4o = $1.50/request\n\n### How It Works\n\n1. Try local Gemma4 first -- handles 70%+ of daily tasks at zero cost\n2. If confidence is low, escalate to Sonnet\n3. Only use Opus for the genuinely hardest problems\n\n### Results\n\n- **70-80% cost reduction** on routine tasks\n- **Better response times** (local is instant)\n- **Privacy wins** (sensitive data stays local)\n\n### Key Insight\n\nYour expensive model is wasted on formatting, summarization, and classification. Reserve it for genuine reasoning.\n\n---\n*Published: 2026-04-16*",
+    "category": "Hot Takes",
+    "publishedAt": "2026-04-16T08:00:00+08:00",
+    "sources": [
+      {
+        "name": "OpenRouter",
+        "url": "https://openrouter.ai/"
+      },
+      {
+        "name": "Ollama",
+        "url": "https://ollama.com/"
+      },
+      {
+        "name": "Anthropic Pricing",
+        "url": "https://www.anthropic.com/pricing"
+      }
+    ],
+    "tags": [
+      "Cost Optimization",
+      "Model Routing",
+      "OpenRouter",
+      "Ollama",
+      "Gemma"
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop&q=80"
+  },
+  {
+    "id": "015",
+    "slug": "ai-video-explainers-picks-2026-04-17",
+    "title": "Top 5 AI Video Explainers This Week: YouTube + Bilibili",
+    "excerpt": "The best AI explanation videos -- from Karpathy's latest to Chinese creators breaking down the newest techniques.",
+    "content": "## Top 5 AI Video Explainers This Week\n\n### 1. Karpathy: The State of LLM Agents\n\nAndrej breaks down the LLM agent landscape -- what works, what does not.\n\n- https://www.youtube.com/@AndrejKarpathy\n\n### 2. AI Explained: The Truth About Cursor's Agent Mode\n\nAn honest teardown -- no marketing, just code analysis.\n\n- https://www.youtube.com/@aiexplained-official\n\n### 3. 李宏毅: LLM 微调最新方法综述\n\n台大李宏毅老师综述了最新 LLM 微调方法 -- DPO、ORPO、SimPO。\n\n- YouTube @HungyiLeeNTU / B站\n\n### 4. Fireship: Vibe Coding Updated\n\nQuick overview of Bolt.new, v0, Lovable.\n\n- https://www.youtube.com/@Fireship\n\n### 5. Theo: Why I Stopped Using AI Coding Tools (And Started Again)\n\nA candid personal take on the AI coding tool journey.\n\n- https://www.youtube.com/@t3dotgg\n\n### Bilibili 特别推荐\n\n- 李沐：最新大模型论文精读系列\n- 同济子豪兄：AI 智能体实战教程\n- 跟李沐学AI：每周更新深度学习前沿内容\n\n---\n*Published: 2026-04-17*",
+    "category": "Video Explainers",
+    "publishedAt": "2026-04-17T08:00:00+08:00",
+    "sources": [
+      {
+        "name": "YouTube - Karpathy",
+        "url": "https://www.youtube.com/@AndrejKarpathy"
+      },
+      {
+        "name": "Bilibili - 李宏毅",
+        "url": "https://www.bilibili.com/video/BV1TAtwzTE1S/"
+      },
+      {
+        "name": "Bilibili - 李沐",
+        "url": "https://www.bilibili.com/video/BV1f5411P769/"
+      }
+    ],
+    "tags": [
+      "YouTube",
+      "Bilibili",
+      "Video",
+      "Education",
+      "Karpathy"
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1200&h=630&fit=crop&q=80"
+  },
+  {
+    "id": "016",
+    "slug": "deeplearning-ai-courses-review-2026-04-17",
+    "title": "DeepLearning.AI Course Review: Best Short Courses in 2026",
+    "excerpt": "Andrew Ng's DeepLearning.AI has 50+ short courses. Here is our ranked list for practicing AI engineers.",
+    "content": "## DeepLearning.AI: Best Short Courses for 2026\n\n### Must-Take\n\n#### 1. ChatGPT Prompt Engineering for Developers\n\n- **Time**: ~1 hour -- Still the clearest introduction to prompt patterns\n\n#### 2. Building Systems with the ChatGPT API\n\n- **Time**: ~1 hour -- Covers chains, evaluation, production considerations\n\n#### 3. LangChain for LLM Application Development\n\n- **Time**: ~1 hour -- Practical patterns for real-world LLM apps\n\n### Highly Recommended\n\n#### 4. Finetuning Large Language Models\n\nCovers LoRA, QLoRA, and when to fine-tune vs prompt\n\n#### 5. Evaluating and Debugging LLM Applications\n\nThe only course that teaches systematic LLM evaluation\n\n#### 6. Multi-AI Agent Systems with CrewAI\n\nPractical multi-agent architecture patterns\n\n### Where\n\n- https://www.deeplearning.ai/short-courses/\n- https://www.coursera.org/\n\n---\n*Published: 2026-04-17*",
+    "category": "AI Innovations",
+    "publishedAt": "2026-04-17T08:00:00+08:00",
+    "sources": [
+      {
+        "name": "DeepLearning.AI",
+        "url": "https://www.deeplearning.ai/short-courses/"
+      },
+      {
+        "name": "Coursera",
+        "url": "https://www.coursera.org/"
+      }
+    ],
+    "tags": [
+      "DeepLearning.AI",
+      "Coursera",
+      "Course",
+      "LLM"
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=1200&h=630&fit=crop&q=80"
+  },
+  {
+    "id": "017",
+    "slug": "vibe-coding-deep-dive-2026-04-17",
+    "title": "Vibe Coding Deep Dive: From Bolt.new to Production",
+    "excerpt": "Vibe coding is incredible for prototypes, but what happens when you need to ship? We tested the entire pipeline.",
+    "content": "## Vibe Coding Deep Dive\n\nYou describe what you want in natural language. An AI builds it. A few minutes later, you have a working web app.\n\n### The Pipeline\n\n1. **Bolt.new** -- Generate initial app from description\n2. **Iterate** -- Refine with natural language feedback\n3. **Export** -- Download the code\n4. **Hand-off** -- Open in Cursor/VS Code for polish\n5. **Deploy** -- Push to Vercel/Cloudflare\n\n### What Works\n\n- **Landing pages** -- 10/10, indistinguishable from hand-crafted\n- **Dashboards with CRUD** -- 8/10, needs minor tweaks\n- **Internal tools** -- 9/10, perfect use case\n- **Prototypes** -- 10/10, the killer use case\n\n### Where It Breaks\n\n- **Complex state management** -- AI struggles with multi-component state\n- **Authentication** -- security-critical code needs human review\n- **Performance** -- AI generates code that works, not code that scales\n- **Accessibility** -- AI does not think about a11y\n\n### The Best Workflow\n\n1. Vibe code the scaffold (80% done)\n2. Hand-code critical paths (auth, payments, performance)\n3. Vibe code the rest (forms, tables, static pages)\n4. Human review everything\n\n### The Verdict\n\n> Vibe coding is to development what power tools are to carpentry.\n\n---\n*Published: 2026-04-17*",
+    "category": "Hot Takes",
+    "publishedAt": "2026-04-17T08:00:00+08:00",
+    "sources": [
+      {
+        "name": "Bolt.new",
+        "url": "https://bolt.new/"
+      },
+      {
+        "name": "Vercel v0",
+        "url": "https://v0.dev/"
+      },
+      {
+        "name": "Lovable",
+        "url": "https://lovable.dev/"
+      }
+    ],
+    "tags": [
+      "Vibe Coding",
+      "Bolt",
+      "v0",
+      "Lovable",
+      "Development"
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=630&fit=crop&q=80"
+  },
+  {
+    "id": "010",
     "slug": "ai-coding-tools-march-2026-2026-04-16",
     "title": "The AI Coding Tool Landscape in March 2026",
     "excerpt": "From Cursor Agent Mode to Windsurf Cascade 2.0 and Claude Code CLI -- the AI IDE space has evolved dramatically. Here is what actually moved the needle.",
@@ -1271,250 +1500,6 @@
         "id": "U6BzW0-7DjA",
         "title": "AI Coding Tools: Complete Comparison 2025",
         "source": "Matt Wolfe"
-      },
-      {
-        "platform": "youtube",
-        "id": "sI1rBiJ9tLc",
-        "title": "How AI Code Assistants Actually Work",
-        "source": "Theo"
-      }
-    ]
-  },
-  {
-    "id": "003",
-    "slug": "karpathy-llm-lecture-explained",
-    "title": "Andrej Karpathy's LLM Lecture: State of LLMs Explained",
-    "excerpt": "Karpathy breaks down the current state of LLMs — what works, what doesn't, and where the field is heading. A must-watch for anyone trying to understand the LLM landscape.",
-    "content": "Andrej Karpathy delivered a comprehensive overview of the current LLM landscape, covering everything from training data to deployment.\n\n## Key Takeaways\n\n### 1. Pre-training is Commodity\n\nThe basics of LLM pre-training are well understood. The real differentiators are:\n- **Data quality over quantity**\n- **Curation, not just collection**\n- **Deduplication at scale**\n\n### 2. Fine-tuning is Underrated\n\nMost LLM performance gains now come from fine-tuning, not architecture innovations:\n- **DPO/RLHF** for alignment\n- **Instruction tuning** for capability\n- **Domain-specific** for specialization\n\n### 3. Context Length is Solved (Sort of)\n\nRoPE, ALiBi, and ring attention have largely solved the context problem. The new bottleneck is **reasoning depth**, not context length.\n\n### 4. The Next Frontier: Reasoning\n\nOpenAI's o1 and Gemini's thinking mode show that extended computation at inference time dramatically improves accuracy on complex tasks.\n\n## Video Resources\n\n- https://www.youtube.com/@AndrejKarpathy\n- https://www.bilibili.com/video/BV1Jz6SYbEiW/\n- https://karpathy.github.io/\n\n## The \"After Effect\" -- What Changes\n\nAfter watching all 10+ lectures, something fundamental shifts:\n\n- You stop treating AI as magic and start understanding it as engineered systems\n- When models fail, you know exactly which component to investigate\n- New architectures no longer intimidate you -- you see them as variations on the same building blocks\n- You can actually explain to your team why a particular approach works or doesn't\n\n## Time Investment\n\nThe entire series is approximately 24 hours. That's less time than most weekend projects, but the ROI in understanding is unmatched by any paid course.\n\n---\n*Sources: karpathy.ai, YouTube channel, community discussions*",
-    "category": "Video Explainers",
-    "publishedAt": "2025-02-23T08:00:00+08:00",
-    "sources": [
-      {
-        "name": "Andrej Karpathy (YouTube)",
-        "url": "https://www.youtube.com/@AndrejKarpathy"
-      },
-      {
-        "name": "Bilibili: Karpathy 中文字幕",
-        "url": "https://www.bilibili.com/video/BV1Jz6SYbEiW/"
-      }
-    ],
-    "tags": [
-      "Karpathy",
-      "LLM",
-      "Education",
-      "YouTube"
-    ],
-    "coverImage": "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=1200&h=630&fit=crop&q=80",
-    "summary": "Two years after its release, Karpathy's series of building neural networks from scratch in PyTorch remains the single highest-leverage learning resource for anyone who wants to truly understand LLMs -- not just use them.",
-    "videos": [
-      {
-        "platform": "youtube",
-        "id": "VMj-3S1tku0",
-        "title": "Karpathy: Neural Networks Zero to Hero (Lecture 1)",
-        "source": "Andrej Karpathy"
-      },
-      {
-        "platform": "youtube",
-        "id": "kCc8FmEb1nY",
-        "title": "Karpathy: Let's build GPT from scratch",
-        "source": "Andrej Karpathy"
-      },
-      {
-        "platform": "bilibili",
-        "id": "BV1Jz6SYbEiW",
-        "title": "Karpathy 神经网络入门（中文字幕）",
-        "source": "Bilibili"
-      }
-    ]
-  },
-  {
-    "id": "004",
-    "slug": "openai-o3-deepresearch",
-    "title": "OpenAI o3 & Deep Research: Autonomous Research Agents Are Here",
-    "excerpt": "OpenAI's o3 achieves 87% on ARC-AGI benchmark and its Deep Research product can autonomously browse the web, synthesize findings into comprehensive reports.",
-    "content": "OpenAI has made two major announcements that signal a shift toward autonomous research agents.\n\n## o3: The Reasoning Breakthrough\n\nOpenAI's o3 model scored 87% on the ARC-AGI benchmark, a significant leap over previous models. Key features:\n- **Extended reasoning** with 24+ hours of compute time per problem\n- **Self-correction** during the reasoning process\n- **Code execution** for mathematical verification\n\n## Deep Research: Autonomous Report Generation\n\nOpenAI's new \"Deep Research\" feature is a fully autonomous research agent that:\n1. **Breaks down** your query into search queries\n2. **Browses** the web independently\n3. **Reads and synthesizes** dozens of sources\n4. **Produces** a comprehensive report with citations\n\n## What This Means for the Industry\n\nThis is no longer about chat. These systems are:\n- **Planning** their own research strategies\n- **Executing** multi-step workflows autonomously\n- **Synthesizing** complex information from multiple sources\n\n**The implication: AI is becoming your research team.**\n\n## Watch & Read More\n\n- https://openai.com/o3/o3-mini\n- https://www.youtube.com/results?search_query=openai+deep+research\n- https://www.bilibili.com/search?keyword=OpenAI+o3",
-    "category": "Industry News",
-    "publishedAt": "2025-02-22T08:00:00+08:00",
-    "sources": [
-      {
-        "name": "OpenAI Blog",
-        "url": "https://openai.com/o3/o3-mini"
-      },
-      {
-        "name": "Hacker News discussion",
-        "url": "https://news.ycombinator.com/"
-      }
-    ],
-    "tags": [
-      "OpenAI",
-      "o3",
-      "Research",
-      "Autonomous Agents"
-    ],
-    "coverImage": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&h=630&fit=crop&q=80",
-    "summary": "OpenAI o3 scores 87% on ARC-AGI, shattering benchmarks by 25 points. Deep Research is a fully autonomous agent that browses, reads, synthesizes dozens of sources into comprehensive reports."
-  },
-  {
-    "id": "005",
-    "slug": "deeplearning-ai-practical-llm-engineering",
-    "title": "DeepLearning.AI Launches Practical LLM Engineering Course",
-    "excerpt": "Andrew Ng's DeepLearning.AI team has released a new hands-on course covering the practical engineering skills every AI developer needs in 2025.",
-    "content": "DeepLearning.AI continues its practical-first approach with a new comprehensive LLM engineering course.\n\n## Course Structure\n\nThe course covers the complete LLM application stack:\n\n### Module 1: LLM Application Architecture\n- Prompt patterns and templates\n- Function calling and tool use\n- Agentic architectures (ReAct, Plan-and-Execute)\n\n### Module 2: Vector Search & RAG\n- Embedding model selection\n- Chunking strategies that actually work\n- Hybrid search: dense + sparse retrieval\n- Re-ranking and rerouting\n\n### Module 3: Evaluation\n- Automated grading of LLM outputs\n- Building evaluation datasets\n- Statistical significance testing\n\n### Module 4: Fine-tuning\n- When to fine-tune vs prompt\n- PEFT and LoRA practical workflows\n- Data preparation for SFT\n\n## Why This Course Matters\n\nThis is the most practical LLM engineering course available. Andrew Ng's approach of building real systems (not just explaining theory) makes it ideal for developers who want to ship production AI applications.\n\n## Available At\n\n- https://www.deeplearning.ai/courses/\n- https://www.coursera.org/\n\n## Additional Resources\n\n- https://www.deeplearning.ai/short-courses/\n- https://www.bilibili.com/search?keyword=DeepLearning+AI+吴恩达",
-    "category": "AI Innovations",
-    "publishedAt": "2025-02-21T08:00:00+08:00",
-    "sources": [
-      {
-        "name": "DeepLearning.AI",
-        "url": "https://www.deeplearning.ai/courses/"
-      },
-      {
-        "name": "Andrew Ng (LinkedIn)",
-        "url": "https://www.linkedin.com/in/andrewyng/"
-      }
-    ],
-    "tags": [
-      "DeepLearning.AI",
-      "LLM",
-      "Course",
-      "RAG"
-    ],
-    "coverImage": "https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=1200&h=630&fit=crop&q=80",
-    "summary": "The most practical LLM engineering course for 2026 covers prompt patterns, RAG design, function calling, evaluation, and fine-tuning with real-world production patterns."
-  },
-  {
-    "id": "006",
-    "slug": "bolt-new-vercel-v0-vibe-coding-revolution",
-    "title": "Bolt.new & Vercel v0: The Vibe Coding Revolution You Can't Ignore",
-    "excerpt": "Browser-first AI development is exploding. Bolt.new and Vercel v0 let you describe what you want in natural language and get working web apps in seconds.",
-    "content": "The Vibe Coding movement has created an entirely new category: browser-first AI development.\n\n## What is Vibe Coding?\n\nVibe Coding is the practice of describing your desired application or feature in natural language, and letting AI generate the working code. You then iterate conversationally, refining until the result is perfect.\n\n**It's not about being lazy — it's about moving from idea to prototype at light speed.**\n\n## Bolt.new (by StackBlitz)\n\n- **Full-stack in the browser**: Runs Node.js, React, and more entirely in your browser via WebContainers\n- **One-click deployment**: Instantly deploy to Cloudflare Pages or similar\n- **Best for**: Complex full-stack applications\n\n## Vercel v0\n\n- **UI-first**: Exceptional at generating beautiful, production-ready UIs\n- **React/Next.js focused**: Integrates with Tailwind, shadcn/ui\n- **Best for**: Frontend-heavy applications and components\n\n## Lovable & Claude Artifacts\n\nOther notable entries:\n- **Lovable.dev**: Vibe coding with built-in design system awareness\n- **Claude Artifacts**: In-chat code generation with preview\n\n## The Bigger Picture\n\nVibe Coding isn't just about code generation. It represents a fundamental shift in **who can build software**. Non-technical founders, designers, and domain experts can now prototype and iterate at speeds previously only available to senior developers.\n\n> The best developers of the future won't be the ones who write the most code — they'll be the ones who describe the best specifications.\n\n## Try Them\n\n- https://bolt.new/\n- https://v0.dev/\n- https://lovable.dev/\n- https://www.bilibili.com/search?keyword=vibe+coding\n\n## Detailed Results By Category\n\n### Landing Pages (90% quality)\nThe AI understands modern design conventions, typography, color theory, and responsive layouts. A non-designer can produce professional-looking landing pages.\n\n### Admin Dashboards (75% quality)\nGenerated layouts are functional but may need adjustments for your exact data patterns. Table sorting, filtering, and pagination usually need tweaking.\n\n### Full Applications (40-60% scaffolded)\nThe AI can build the scaffold, connect basic API calls, and set up routing. But business logic, complex state, and edge cases require human coding.\n\n## Common Mistakes\n\n- Trying to build everything with vibe coding (it's a scaffold, not a complete solution)\n- Not reviewing generated code for security issues\n- Expecting production-ready code from a prototype tool\n- Skipping the manual code review step\n\n---\n*Based on hands-on testing across multiple project types*",
-    "category": "New AI Tools",
-    "publishedAt": "2025-02-20T08:00:00+08:00",
-    "sources": [
-      {
-        "name": "Bolt.new",
-        "url": "https://bolt.new/"
-      },
-      {
-        "name": "Vercel v0",
-        "url": "https://v0.dev/"
-      },
-      {
-        "name": "YouTube: Fireship",
-        "url": "https://www.youtube.com/@Fireship"
-      }
-    ],
-    "tags": [
-      "Vibe Coding",
-      "Bolt",
-      "v0",
-      "No-Code"
-    ],
-    "coverImage": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=630&fit=crop&q=80",
-    "summary": "We tested the full vibe coding pipeline: from Bolt.new generation to export, IDE polish, and deployment. What works surprisingly well, where it breaks, and the workflow that actually ships to production.",
-    "videos": [
-      {
-        "platform": "youtube",
-        "id": "eVq8jEwFj4Y",
-        "title": "Vibe Coding in 100 Seconds",
-        "source": "Fireship"
-      },
-      {
-        "platform": "youtube",
-        "id": "ZqTn1zSBDsA",
-        "title": "The Future of AI Coding",
-        "source": "Fireship"
-      }
-    ]
-  },
-  {
-    "id": "007",
-    "slug": "langgraph-agent-from-scratch",
-    "title": "Building an AI Agent from Scratch with LangGraph: Step-by-Step",
-    "excerpt": "A practical walkthrough of building a multi-step research agent using LangGraph. See how to chain together web search, scraping, summarization, and report generation.",
-    "content": "Building AI agents has become accessible to any Python developer. Here's how to build a research agent from scratch.\n\n## What You'll Build\n\nAn agent that can:\n1. **Search** the web for information about a topic\n2. **Read and summarize** the most relevant pages\n3. **Synthesize** findings into a comprehensive report\n4. **Save** the results as a markdown file\n\n## Architecture\n\n```\nUser Query → Planner → [Search → Read → Summarize] × N → Synthesize → Report\n```\n\n## Setup\n\n```python\npip install langchain langgraph langchain-openai tavily-python\n```\n\n## The Graph\n\nLangGraph lets you define agent workflows as state machines:\n\n- **State**: What does the agent know so far?\n- **Nodes**: What actions can the agent take?\n- **Edges**: When does the agent move from one action to another?\n\n## Key Concepts\n\n- **Conditional edges**: Agent decides whether to search more or write the report\n- **Human-in-the-loop**: Review intermediate steps before continuing\n- **Persistence**: Save and resume long-running agent sessions\n\n## Production Considerations\n\n- **Rate limiting**: Handle API rate limits gracefully\n- **Error handling**: Detect when tools fail and retry\n- **Cost tracking**: Monitor token usage per agent run\n- **Evaluation**: Test agent output quality automatically\n\n## Resources\n\n- https://python.langchain.com/docs/langgraph/\n- https://www.youtube.com/@LangChain\n- https://www.bilibili.com/search?keyword=LangGraph\n\n## Example Use Cases\n\nThe architecture described here can be adapted for:\n- Competitive intelligence reports\n- Academic literature reviews\n- Market analysis summaries\n- Technical research gathering\n\n## Beyond LangGraph\n\nWhile this guide uses LangGraph, the pattern applies to any agent framework:\n- CrewAI for role-based agent coordination\n- AutoGen for multi-agent conversations\n- Custom state machines for simpler workflows\n\n---\n*Based on LangGraph official documentation and production experience*",
-    "category": "Use Cases",
-    "publishedAt": "2025-02-19T08:00:00+08:00",
-    "sources": [
-      {
-        "name": "LangGraph Docs",
-        "url": "https://docs.langchain.com/oss/python/langgraph/quickstart"
-      },
-      {
-        "name": "LangChain YouTube",
-        "url": "https://www.youtube.com/@LangChain"
-      }
-    ],
-    "tags": [
-      "LangGraph",
-      "Agents",
-      "Python",
-      "Tutorial"
-    ],
-    "coverImage": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=630&fit=crop&q=80",
-    "summary": "Build a research agent from scratch using LangGraph: web search, content extraction, summarization, and report synthesis. Complete with production considerations for rate limits, errors, and evaluation."
-  },
-  {
-    "id": "008",
-    "slug": "google-gemma-3-multimodal-local",
-    "title": "Google Releases Gemma 3: Multi-Modal AI You Can Run Locally",
-    "excerpt": "Gemma 3 brings vision-text understanding to local models. The 27B parameter version can understand images and text simultaneously, running on a single consumer GPU.",
-    "content": "Google has released Gemma 3, and it's significant for the local AI community.\n\n## What's New\n\n- **Vision-text understanding**: The model can process both images and text natively\n- **27B parameter version**: Runs on a single RTX 3090/4090 with 6-bit quantization\n- **Open weights**: Released under Gemma license for research and commercial use\n- **State-of-the-art** for its size on multimodal benchmarks\n\n## Why This Matters for Local AI\n\nUntil now, true multimodal understanding required cloud APIs or massive models. Gemma 3 27B changes that:\n\n- **Privacy**: Process sensitive images locally, no cloud needed\n- **Cost**: Zero API costs, just electricity\n- **Latency**: No network round-trip, real-time inference\n- **Customization**: Fine-tune for your specific domain\n\n## Getting Started\n\n```python\nfrom transformers import AutoModelForCausalLM\nmodel = AutoModelForCausalLM.from_pretrained(\n    \"google/gemma-3-27b-it\",\n    quantization_config={\"load_in_4bit\": True}\n)\n```\n\n## Video Tutorials\n\n- https://www.youtube.com/results?search_query=gemma+3+local+setup\n- https://www.bilibili.com/search?keyword=Gemma+3\n\n## Performance Numbers\n\nOn a single RTX 4090 with 4-bit quantization:\n- **Text generation**: ~30 tokens/sec\n- **Image understanding**: ~10 seconds per image\n- **Memory usage**: ~16-18GB VRAM\n\n## Comparison to Cloud APIs\n\nFor processing 1000 images/day:\n- Cloud API (at $0.01/image): $10/day\n- Local Gemma3: ~$0.50/day (electricity)\n- **Savings**: ~95% annually\n\n---\n*Based on community benchmarks and Google's technical report*",
-    "category": "New AI Tools",
-    "publishedAt": "2025-02-18T08:00:00+08:00",
-    "sources": [
-      {
-        "name": "Google AI Blog",
-        "url": "https://blog.google/technology/ai/"
-      },
-      {
-        "name": "Hugging Face",
-        "url": "https://huggingface.co/google"
-      }
-    ],
-    "tags": [
-      "Gemma",
-      "Google",
-      "Multimodal",
-      "Local AI"
-    ],
-    "coverImage": "https://images.unsplash.com/photo-1558317372-540997fa15f7?w=1200&h=630&fit=crop&q=80",
-    "summary": "Gemma 3 27B with 4-bit quantization fits on a single RTX 3090 with full vision-text understanding. This makes state-of-the-art multimodal AI accessible to hobbyists and small teams with zero API costs."
-  },
-  {
-    "id": "009",
-    "slug": "ai-agents-software-2025-reality",
-    "title": "AI Agents in Software Development: The 2025 Reality Check",
-    "excerpt": "After the hype, what do AI agents actually deliver in real software teams? A candid look at what works, what doesn't, and what's genuinely changing.",
-    "content": "2024 was the year of AI agent hype. 2025 is the year of reality.\n\n## What Actually Works (Right Now)\n\n### ✅ Code Review & PR Analysis\n- AI agents that review PRs catch ~30% of bugs before human review\n- Tools: CodiumAI, CodeRabbit\n\n### ✅ Test Generation\n- Auto-generate unit tests from code descriptions\n- Coverage increases 2-5x with AI-generated tests\n\n### ✅ Documentation Writing\n- AI agents write API docs, README files, and inline comments\n- Saves 2-3 hours per week per developer\n\n### ✅ Bug Triage\n- Classify and prioritize incoming bug reports\n- Suggest likely root causes and affected code areas\n\n## What's Still Hype\n\n### ❌ Fully Autonomous Development\n- Agents still struggle with architectural decisions\n- Multi-day coding tasks require too much human intervention\n\n### ❌ Cross-codebase Refactoring\n- Understanding a 1M+ line codebase is still beyond most agents\n- False positives in refactoring suggestions remain high\n\n## The Verdict\n\nAI agents are **excellent assistants** and **terrible replacements**. The best teams are using them to:\n- Eliminate repetitive work\n- Catch bugs earlier\n- Reduce time-to-review\n- Accelerate onboarding\n\n## Hot Take\n\nThe developers who get 10x productivity gains aren't the ones replacing themselves with AI. They're the ones who **orchestrate** AI agents like a tech lead managing an intern: give them clear instructions, review their work, and iterate rapidly.\n\n## Discussion\n\n- https://news.ycombinator.com/\n- https://www.youtube.com/@Theo\n- https://www.bilibili.com/search?keyword=AI编程代理\n## What Actually Works Right Now\n\n### Code Review & PR Analysis\nAI agents that review PRs catch approximately 30% of bugs before human review. The key insight: they do this in parallel with human review, not instead of it. Tools leading this: CodiumAI, CodeRabbit, Reviewable with AI.\n\n### Test Generation\nAuto-generate unit tests from code descriptions. Coverage increases 2-5x. Quality is not perfect, but the volume-to-quality ratio is excellent.\n\n### Documentation Writing\nAI writes API docs, README files, inline comments. Saves 2-3 hours per week per developer. Docs are good enough that they rarely need more than light editing.\n\n### Bug Triage\nClassifies and prioritizes bug reports. Suggests likely root causes. Reduces time from reported to understood by 50%.\n\n## What Is Still Hype\n\n### Fully Autonomous Development\nAgents struggle with architectural decisions. Multi-day coding tasks require too much human intervention.\n\n### Cross-Codebase Refactoring\nUnderstanding million-plus-line codebases remains beyond most agents. False positives in refactoring are unacceptably high.\n\n## The Verdict\n\nAI agents are excellent assistants and terrible replacements. The 10x developers are those who orchestrate agents like a tech lead manages interns: clear instructions, review work, iterate rapidly.\n\n\n## How to Get Started with AI Agents at Work\n\n1. **Start small**: Pick one repetitive task and automate it\n2. **Measure before**: Baseline how long it takes currently\n3. **Deploy carefully**: Start with assistive mode (suggestions, not automatic changes)\n4. **Evaluate rigorously**: Compare quality before and after\n5. **Scale gradually**: Increase automation only when quality meets standards\n\n## The Honest Truth\n\nAI agents will not replace developers this year. They will:\n- Make developers 2x faster at code review\n- Cut documentation time in half\n- Reduce bug escape rate\n- Improve developer satisfaction by removing grunt work\n\n---\n*Based on community feedback and real-world deployment reports*",
-    "category": "Hot Takes",
-    "publishedAt": "2025-02-17T08:00:00+08:00",
-    "sources": [
-      {
-        "name": "Hacker News",
-        "url": "https://news.ycombinator.com/"
-      },
-      {
-        "name": "Twitter/X: @swyx",
-        "url": "https://x.com/swyx"
-      },
-      {
-        "name": "YouTube: Theo",
-        "url": "https://www.youtube.com/@t3dotgg"
-      }
-    ],
-    "tags": [
-      "AI Agents",
-      "Opinion",
-      "Software Development"
-    ],
-    "coverImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=630&fit=crop&q=80",
-    "summary": "After a year of massive hype, what do AI agents actually deliver? 30% bug catch rate in code review, 2-3 hours per week saved on docs, but fully autonomous development remains out of reach.",
-    "videos": [
-      {
-        "platform": "youtube",
-        "id": "dPmB8h68g6s",
-        "title": "AI Agents Explained",
-        "source": "Theo"
       },
       {
         "platform": "youtube",
